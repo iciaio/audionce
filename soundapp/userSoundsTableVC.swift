@@ -57,4 +57,16 @@ class userSoundsTableVC: UITableViewController {
         
         return cell
     }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            
+            currentUser?.removeObject(soundArray[indexPath.row], forKey: "sounds")
+            
+            
+            
+            self.soundArray.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        }
+    }
 }

@@ -158,7 +158,9 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
                                     self.playPauseButton.enabled = false
                                     self.submitButton.enabled = false
                                     self.titleTextField.text = ""
+                                    println("1")
                                     self.addToUserSoundArray(newSound)
+                                    println("2")
                                     self.performSegueWithIdentifier("to_main_from_submit", sender: self)
                                 } else {
                                     println("error saving sound")
@@ -175,9 +177,11 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     //faith is when you belive something determines the undeterminable, not that everything is inherently determinable (though perhaps not by us). the latter is science
 
     func addToUserSoundArray(soundObject : PFObject){
+        println("3")
         let currentUser = PFUser.currentUser()
         currentUser!.addObject(soundObject, forKey: "sounds")
         currentUser!.saveInBackground()
+        println("Tadaaahhhh")
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
