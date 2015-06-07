@@ -29,18 +29,16 @@ class soundCell: UITableViewCell, AVAudioPlayerDelegate {
                 sound?.fetchIfNeededInBackgroundWithBlock({
                     (object, error) -> Void in
                     if (error == nil){
+                        var error: NSError?
                         var audioFile: PFFile = sound!["file"] as! PFFile
-                        audioFile.getDataInBackgroundWithBlock({
-                            (soundData: NSData?, error: NSError?) -> Void in
-                            if (error == nil) {
-                                var error: NSError?
-                                var closestPlayer = AVAudioPlayer(data: soundData, error: &error)
-                                closestPlayer.delegate = self
-                                closestPlayer.prepareToPlay()
-                                closestPlayer.volume = 1.0
-                                closestPlayer.play()
-                            }
-                        })
+                        var audioURLString = audioFile.url
+                        let audioURL = NSURL(string: audioURLString!)
+                        println(audioURLString)
+                        var closestPlayer = AVAudioPlayer(contentsOfURL: audioURL , error: &error)
+                        closestPlayer.delegate = self
+                        closestPlayer.prepareToPlay()
+                        closestPlayer.volume = 1.0
+                        closestPlayer.play()
                     }
                 })
             }
