@@ -7,15 +7,40 @@
 //
 
 import UIKit
+import Parse
+import AVFoundation
 
-class soundCell: UITableViewCell {
+class soundCell: UITableViewCell, AVAudioPlayerDelegate {
     
     @IBOutlet weak var soundTitle: UILabel!
     @IBOutlet weak var playPauseButton: UIButton!
     var soundId : String = "fuck"
     
     @IBAction func playPauseButton(sender: AnyObject) {
-        println("hi")
+        println(soundId)
+        var query = PFQuery(className: "Sounds")
+        query.whereKey("objectId", equalTo: soundId)
+        query.getFirstObjectInBackgroundWithBlock{
+            (sound: PFObject?, error: NSError?) -> Void in
+            if error != nil || sound == nil {
+                println("request user failed on getting friend to request")
+            } else {
+                // The find succeeded.
+                let audioFile: PFFile = sound!["file"] as! PFFile
+                audioFile.getDataInBackgroundWithBlock({
+                    (soundData: NSData?, error: NSError?) -> Void in
+                    if (error == nil) {
+                        var error: NSError?
+                        var closestPlayer = AVAudioPlayer(data: soundData, error: &error)
+                        println(soundData)
+                        closestPlayer.delegate = self
+                        closestPlayer.prepareToPlay()
+                        closestPlayer.volume = 1.0
+                        closestPlayer.play()
+                    }
+                })
+            }
+        }
     }
     
 }

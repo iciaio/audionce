@@ -18,7 +18,7 @@ class userSoundsTableVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadList:",name:"reloadFriendListVC", object: nil)
-        //self.setSounds()
+        self.setSounds()
     }
     
     func setSounds(){
@@ -28,7 +28,7 @@ class userSoundsTableVC: UITableViewController {
                 (object, error) -> Void in
                 if (error == nil){
                     self.soundArray.append(sound)
-//                    self.tableView.reloadData()
+                    self.tableView.reloadData()
                 }
             })
         }
