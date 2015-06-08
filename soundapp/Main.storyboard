@@ -223,8 +223,8 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0q-He-Vor">
-                                            <rect key="frame" x="264" y="10" width="46" height="30"/>
-                                            <state key="normal" title="Button">
+                                            <rect key="frame" x="227" y="10" width="67" height="30"/>
+                                            <state key="normal" title="Play">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
@@ -234,7 +234,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="playPauseButton" destination="h0q-He-Vor" id="I92-0G-kK5"/>
+                                    <outlet property="playPauseButton" destination="h0q-He-Vor" id="V9z-bx-t8i"/>
                                     <outlet property="soundTitle" destination="Epc-mr-mAb" id="AoN-d1-Oue"/>
                                 </connections>
                             </tableViewCell>
