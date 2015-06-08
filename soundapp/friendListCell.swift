@@ -12,6 +12,7 @@ import Parse
 class friendListCell: UITableViewCell {
 
 
+    @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     var friend = PFUser()
     var currentUser = PFUser.currentUser()

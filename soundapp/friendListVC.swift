@@ -55,6 +55,15 @@ class friendListVC: UITableViewController {
             (object, error) -> Void in
             if (error == nil){
                 cell.userNameLabel.text = self.friendArray[indexPath.row].username
+                cell.userImage.layer.cornerRadius = cell.userImage.frame.size.width/2
+                cell.userImage.clipsToBounds = true
+                if let userPicture = PFUser.currentUser()?["profile_picture"] as? PFFile {
+                    userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                        if (error == nil) {
+                            cell.userImage.image = UIImage(data:imageData!)
+                        }
+                    }
+                }
             }
         })
 

@@ -267,14 +267,18 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OnD-b8-HhL">
-                                            <rect key="frame" x="19" y="11" width="167" height="21"/>
+                                            <rect key="frame" x="57" y="11" width="167" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4ok-9J-KG2">
+                                            <rect key="frame" x="11" y="4" width="36" height="36"/>
+                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="userImage" destination="4ok-9J-KG2" id="ZK5-Cc-lLr"/>
                                     <outlet property="userNameLabel" destination="OnD-b8-HhL" id="MT0-2j-jIo"/>
                                 </connections>
                             </tableViewCell>
