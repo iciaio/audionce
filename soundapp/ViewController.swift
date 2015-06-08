@@ -19,6 +19,7 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
     var currentLocation = CLLocationCoordinate2D()
     var oldAnnotationDict = Dictionary<String, MKAnnotation>()
     var newAnnotationDict = Dictionary<String, MKAnnotation>()
+    var player =  AVAudioPlayer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,29 +113,12 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
                         audioFile.getDataInBackgroundWithBlock({
                             (soundData: NSData?, error: NSError?) -> Void in
                             if (error == nil) {
-                                var error: NSError?
-                                var closestPlayer = AVAudioPlayer(data: soundData, error: &error)
-                                //println("should be playing here")
-                                closestPlayer.delegate = self
-                                closestPlayer.prepareToPlay()
-                                closestPlayer.volume = 1.0
-                                closestPlayer.play()
-//                                var closestCoords = CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude)
-//                                var point1 = MKMapPointForCoordinate(self.currentLocation)
-//                                var point2 = MKMapPointForCoordinate(closestCoords)
-//                                let distance: CLLocationDistance = MKMetersBetweenMapPoints(point1, point2)
-//                                if (distance < 20){
-//                                    println("distance: \(distance)")
-//                                    if (closestPlayer.playing != true) {
-//                                        closestPlayer.prepareToPlay()
-//                                        closestPlayer.volume = 3.0
-//                                        closestPlayer.play()
-//                                        println("playing")
-//                                        println(closestPlayer)
-//                                        println(sound!["title"])
-//                                    }
-//                                }
                                 
+                                dispatch_async(dispatch_get_main_queue()) {
+                                    self.player = AVAudioPlayer(data: soundData, error: nil)
+                                    self.player.delegate = self
+                                    self.player.play()
+                                }
                                 
                             } else {
                                 println("error")
