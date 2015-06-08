@@ -162,6 +162,10 @@ class addFriendVC: UITableViewController, UISearchBarDelegate, UITableViewDataSo
         // Dispose of any resources that can be recreated.
     }
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+        return 56.0
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if search == true{
             if dataSecond != [] {
@@ -173,6 +177,15 @@ class addFriendVC: UITableViewController, UISearchBarDelegate, UITableViewDataSo
                 if (error == nil){
                     if let name = self.mainData.username{
                         cell.userNameLabel.text = self.mainData.username
+                    }
+                    cell.userImage.layer.cornerRadius = cell.userImage.frame.size.width/2
+                    cell.userImage.clipsToBounds = true
+                    if let userPicture = self.mainData["profile_picture"] as? PFFile {
+                        userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                            if (error == nil) {
+                                cell.userImage.image = UIImage(data:imageData!)
+                            }
+                        }
                     }
                 }
             })

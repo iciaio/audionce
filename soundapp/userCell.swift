@@ -12,6 +12,7 @@ import Parse
 class userCell: UITableViewCell {
 
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var userImage: UIImageView!
     
     @IBAction func requestFriend(sender: AnyObject) {
         let currentUser = PFUser.currentUser()
