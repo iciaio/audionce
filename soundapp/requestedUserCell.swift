@@ -12,6 +12,7 @@ import Parse
 class requestedUserCell: UITableViewCell {
 
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var userImage: UIImageView!
     var friend = PFUser()
     
     @IBAction func recindRequest(sender: AnyObject)

@@ -162,7 +162,7 @@ class addFriendVC: UITableViewController, UISearchBarDelegate, UITableViewDataSo
         // Dispose of any resources that can be recreated.
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 56.0
     }
     
@@ -203,6 +203,15 @@ class addFriendVC: UITableViewController, UISearchBarDelegate, UITableViewDataSo
                         if let name = self.mainData.username{
                             cell2.userNameLabel.text = self.mainData.username
                         }
+                        cell2.userImage.layer.cornerRadius = cell2.userImage.frame.size.width/2
+                        cell2.userImage.clipsToBounds = true
+                        if let userPicture = self.mainData["profile_picture"] as? PFFile {
+                            userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                                if (error == nil) {
+                                    cell2.userImage.image = UIImage(data:imageData!)
+                                }
+                            }
+                        }
                     }
                 })
                 return cell2
@@ -216,6 +225,15 @@ class addFriendVC: UITableViewController, UISearchBarDelegate, UITableViewDataSo
                     if (error == nil){
                         if let name = self.mainData.username{
                             cell3.userNameLabel.text = self.mainData.username
+                        }
+                        cell3.userImage.layer.cornerRadius = cell3.userImage.frame.size.width/2
+                        cell3.userImage.clipsToBounds = true
+                        if let userPicture = self.mainData["profile_picture"] as? PFFile {
+                            userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                                if (error == nil) {
+                                    cell3.userImage.image = UIImage(data:imageData!)
+                                }
+                            }
                         }
                     }
                 })

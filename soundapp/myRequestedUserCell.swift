@@ -16,6 +16,7 @@ class myRequestedUserCell: UITableViewCell {
     
     
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var userImage: UIImageView!
     
     @IBAction func acceptRequest(sender: AnyObject) {
         
