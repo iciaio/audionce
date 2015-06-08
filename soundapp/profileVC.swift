@@ -17,6 +17,8 @@ class profileVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width/2
+        self.profilePicture.clipsToBounds = true
         if let userPicture = PFUser.currentUser()?["profile_picture"] as? PFFile {
             userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
                 if (error == nil) {
