@@ -21,6 +21,7 @@
 		C0C782C21B2557B900E8DE74 /* friendsnav.png in Resources */ = {isa = PBXBuildFile; fileRef = C0C782C11B2557B900E8DE74 /* friendsnav.png */; };
 		C0C863EF1B1AC04C007BDE5E /* myRequestedUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C863EE1B1AC04C007BDE5E /* myRequestedUserCell.swift */; };
 		C0CA36431B1926CF0094C498 /* requestedUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CA36421B1926CF0094C498 /* requestedUserCell.swift */; };
+		C0CB5D341B25624800DD8578 /* editpencil.png in Resources */ = {isa = PBXBuildFile; fileRef = C0CB5D331B25624800DD8578 /* editpencil.png */; };
 		C0CB93A01B0ADF010079C45B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CB939F1B0ADF010079C45B /* AppDelegate.swift */; };
 		C0CB93A31B0ADF010079C45B /* soundapp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C0CB93A11B0ADF010079C45B /* soundapp.xcdatamodeld */; };
 		C0CB93AA1B0ADF010079C45B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0CB93A91B0ADF010079C45B /* Images.xcassets */; };
@@ -81,6 +82,7 @@
 		C0C782C11B2557B900E8DE74 /* friendsnav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friendsnav.png; sourceTree = "<group>"; };
 		C0C863EE1B1AC04C007BDE5E /* myRequestedUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myRequestedUserCell.swift; sourceTree = "<group>"; };
 		C0CA36421B1926CF0094C498 /* requestedUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = requestedUserCell.swift; sourceTree = "<group>"; };
+		C0CB5D331B25624800DD8578 /* editpencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editpencil.png; sourceTree = "<group>"; };
 		C0CB939A1B0ADF010079C45B /* soundapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = soundapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0CB939E1B0ADF010079C45B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C0CB939F1B0ADF010079C45B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 				C0C782BF1B25573200E8DE74 /* addfriendsnav.png */,
 				C0C782B81B2553FC00E8DE74 /* navaudionce.png */,
 				C0C782BC1B25556700E8DE74 /* navprofile.png */,
+				C0CB5D331B25624800DD8578 /* editpencil.png */,
 				C0DD95971B0C5FFE00CB6DFC /* me.jpg */,
 			);
 			name = images;
@@ -392,6 +395,7 @@
 				C0C782BB1B2554F200E8DE74 /* navaddsound.png in Resources */,
 				C0CB93AA1B0ADF010079C45B /* Images.xcassets in Resources */,
 				C0CC9D661B20274D00C85A88 /* Icon-60@2x.png in Resources */,
+				C0CB5D341B25624800DD8578 /* editpencil.png in Resources */,
 				C0C782B91B2553FC00E8DE74 /* navaudionce.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

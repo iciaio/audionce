@@ -13,9 +13,16 @@ class profileVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
 
     @IBOutlet weak var txtUsername: UILabel!
     @IBOutlet weak var profilePicture: UIImageView!
+    @IBOutlet weak var editNameOutlet: UIButton!
+    @IBOutlet weak var editPicOutlet: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let editImage = UIImage(named: "editpencil.png")
+        self.editNameOutlet.setImage(editImage, forState: UIControlState.Normal)
+        self.editPicOutlet.setImage(editImage, forState: UIControlState.Normal)
+
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 67, height: 22))
         imageView.contentMode = .ScaleAspectFit
