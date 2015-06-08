@@ -29,23 +29,19 @@ class soundCell: UITableViewCell, AVAudioPlayerDelegate {
                 sound?.fetchIfNeededInBackgroundWithBlock({
                     (object, error) -> Void in
                     if (error == nil){
-//                        var error: NSError?
-//                        var audioFile: PFFile = sound!["file"] as! PFFile
-//                        var audioURLString = audioFile.url!
-//                        let audioURL = NSURL(fileURLWithPath: audioURLString)
-//                        let soundData = NSData(contentsOfURL: audioURL!)
-//                        println("playing.... (or at least it should be")
-//                        var player = AVAudioPlayer(data: soundData, error: &error)
-//                        if player == nil {
-//                            if let e = error {
-//                                println(e.localizedDescription)
-//                            }
-//                        }
-//                        player.prepareToPlay()
-//                        player.volume = 1.0
-//                        player.delegate = self
-//                        player.play()
-                        println("here")
+                        var audioFile: PFFile = sound!["file"] as! PFFile
+                        audioFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                            if (error == nil) {
+                                let audioURLString = audioFile.url!
+                                let audioURL = NSURL(string: audioURLString)!
+                                println(audioURL)
+                                let audioData = NSData(contentsOfURL: audioURL)!
+                                println(audioData)
+                                let player = AVAudioPlayer(data: audioData, error: nil)
+                                println(player)
+                                player.play()
+                            }
+                        }
                     }
                 })
             }
