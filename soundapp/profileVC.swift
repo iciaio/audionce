@@ -17,6 +17,12 @@ class profileVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 67, height: 22))
+        imageView.contentMode = .ScaleAspectFit
+        let image = UIImage(named: "navprofile.png")
+        imageView.image = image
+        navigationItem.titleView = imageView
+        
         self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width/2
         self.profilePicture.clipsToBounds = true
         if let userPicture = PFUser.currentUser()?["profile_picture"] as? PFFile {

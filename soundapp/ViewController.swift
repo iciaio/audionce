@@ -22,6 +22,13 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 85, height: 22))
+        imageView.contentMode = .ScaleAspectFit
+        let image = UIImage(named: "navaudionce.png")
+        imageView.image = image
+        navigationItem.titleView = imageView
+        
         var timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: Selector("clearAndRepopulateAnnotations"), userInfo: nil, repeats: true)
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest;

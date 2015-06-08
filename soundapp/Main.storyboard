@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
-        <!--Audionce-->
+        <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="soundapp" customModuleProvider="target" sceneMemberID="viewController">
@@ -28,7 +28,7 @@
                             <constraint firstAttribute="trailing" secondItem="3Nt-zJ-UH3" secondAttribute="trailing" id="giN-j0-y9D"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Audionce" id="x3L-ve-qYO">
+                    <navigationItem key="navigationItem" id="x3L-ve-qYO">
                         <barButtonItem key="leftBarButtonItem" title="Profile" id="NKo-NQ-YHR">
                             <connections>
                                 <segue destination="khH-PW-dol" kind="push" id="EOK-kU-jKD"/>
@@ -49,7 +49,7 @@
             </objects>
             <point key="canvasLocation" x="761" y="273"/>
         </scene>
-        <!--Add Sound-->
+        <!--New SoundVC-->
         <scene sceneID="WsM-cl-me5">
             <objects>
                 <viewController id="jtk-Bf-eDn" customClass="newSoundVC" customModule="soundapp" customModuleProvider="target" sceneMemberID="viewController">
@@ -96,7 +96,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Sound" id="sIA-nm-YbF"/>
+                    <navigationItem key="navigationItem" id="sIA-nm-YbF"/>
                     <connections>
                         <outlet property="playPauseButton" destination="Cuh-YA-ZUK" id="r6B-U9-Up8"/>
                         <outlet property="recordStopButton" destination="dSc-x5-G6I" id="tUm-zf-HRK"/>
@@ -109,7 +109,7 @@
             </objects>
             <point key="canvasLocation" x="1276" y="23"/>
         </scene>
-        <!--Profile-->
+        <!--ProfileVC-->
         <scene sceneID="0RU-KN-8Xe">
             <objects>
                 <viewController id="khH-PW-dol" customClass="profileVC" customModule="soundapp" customModuleProvider="target" sceneMemberID="viewController">
@@ -185,7 +185,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="Yvz-F2-6Ig"/>
+                    <navigationItem key="navigationItem" id="Yvz-F2-6Ig"/>
                     <connections>
                         <outlet property="profilePicture" destination="dxZ-9o-X7o" id="0q4-MX-5B6"/>
                         <outlet property="txtUsername" destination="vBc-dE-RFA" id="KxP-b5-esU"/>
@@ -243,7 +243,7 @@
             </objects>
             <point key="canvasLocation" x="1692" y="1231"/>
         </scene>
-        <!--Friend List-->
+        <!--Friend ListVC-->
         <scene sceneID="zJ6-IJ-Tam">
             <objects>
                 <tableViewController id="MiC-kh-CXf" customClass="friendListVC" customModule="soundapp" customModuleProvider="target" sceneMemberID="viewController">
@@ -288,7 +288,7 @@
                             <outlet property="delegate" destination="MiC-kh-CXf" id="iLM-Ri-09D"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Friend List" id="zlw-BH-G9x">
+                    <navigationItem key="navigationItem" id="zlw-BH-G9x">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ldf-Re-9Ye">
                             <connections>
                                 <segue destination="TU3-D0-ubA" kind="push" id="aFn-Xc-otx"/>
@@ -300,7 +300,7 @@
             </objects>
             <point key="canvasLocation" x="1833" y="512"/>
         </scene>
-        <!--Requested and Pending-->
+        <!--Add FriendVC-->
         <scene sceneID="Mux-Kr-8P3">
             <objects>
                 <tableViewController id="TU3-D0-ubA" customClass="addFriendVC" customModule="soundapp" customModuleProvider="target" sceneMemberID="viewController">
@@ -411,7 +411,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Requested and Pending" id="hdr-iu-NOp"/>
+                    <navigationItem key="navigationItem" id="hdr-iu-NOp"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="searchTextField" destination="cL4-xG-kBT" id="9ND-uk-vE2"/>
@@ -558,9 +558,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="cSD-eZ-DKv"/>
+        <segue reference="DNa-9M-t5Y"/>
+        <segue reference="fCo-6W-zNn"/>
+        <segue reference="skG-5F-pzo"/>
         <segue reference="9vi-et-TO4"/>
-        <segue reference="wpq-Dp-2c7"/>
-        <segue reference="B6k-PE-Ijn"/>
     </inferredMetricsTieBreakers>
 </document>

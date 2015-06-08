@@ -14,6 +14,11 @@
 		C0C33A9C1B1D2962008A4A2B /* friendListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C33A9B1B1D2962008A4A2B /* friendListCell.swift */; };
 		C0C436231B16BE6A0045CB63 /* userCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C436221B16BE6A0045CB63 /* userCell.swift */; };
 		C0C436291B178E8C0045CB63 /* addFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C436281B178E8C0045CB63 /* addFriendVC.swift */; };
+		C0C782B91B2553FC00E8DE74 /* navaudionce.png in Resources */ = {isa = PBXBuildFile; fileRef = C0C782B81B2553FC00E8DE74 /* navaudionce.png */; };
+		C0C782BB1B2554F200E8DE74 /* navaddsound.png in Resources */ = {isa = PBXBuildFile; fileRef = C0C782BA1B2554F200E8DE74 /* navaddsound.png */; };
+		C0C782BD1B25556700E8DE74 /* navprofile.png in Resources */ = {isa = PBXBuildFile; fileRef = C0C782BC1B25556700E8DE74 /* navprofile.png */; };
+		C0C782C01B25573200E8DE74 /* addfriendsnav.png in Resources */ = {isa = PBXBuildFile; fileRef = C0C782BF1B25573200E8DE74 /* addfriendsnav.png */; };
+		C0C782C21B2557B900E8DE74 /* friendsnav.png in Resources */ = {isa = PBXBuildFile; fileRef = C0C782C11B2557B900E8DE74 /* friendsnav.png */; };
 		C0C863EF1B1AC04C007BDE5E /* myRequestedUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C863EE1B1AC04C007BDE5E /* myRequestedUserCell.swift */; };
 		C0CA36431B1926CF0094C498 /* requestedUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CA36421B1926CF0094C498 /* requestedUserCell.swift */; };
 		C0CB93A01B0ADF010079C45B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CB939F1B0ADF010079C45B /* AppDelegate.swift */; };
@@ -69,6 +74,11 @@
 		C0C33A9B1B1D2962008A4A2B /* friendListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = friendListCell.swift; sourceTree = "<group>"; };
 		C0C436221B16BE6A0045CB63 /* userCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userCell.swift; sourceTree = "<group>"; };
 		C0C436281B178E8C0045CB63 /* addFriendVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addFriendVC.swift; sourceTree = "<group>"; };
+		C0C782B81B2553FC00E8DE74 /* navaudionce.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navaudionce.png; sourceTree = "<group>"; };
+		C0C782BA1B2554F200E8DE74 /* navaddsound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navaddsound.png; sourceTree = "<group>"; };
+		C0C782BC1B25556700E8DE74 /* navprofile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navprofile.png; sourceTree = "<group>"; };
+		C0C782BF1B25573200E8DE74 /* addfriendsnav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addfriendsnav.png; sourceTree = "<group>"; };
+		C0C782C11B2557B900E8DE74 /* friendsnav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friendsnav.png; sourceTree = "<group>"; };
 		C0C863EE1B1AC04C007BDE5E /* myRequestedUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myRequestedUserCell.swift; sourceTree = "<group>"; };
 		C0CA36421B1926CF0094C498 /* requestedUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = requestedUserCell.swift; sourceTree = "<group>"; };
 		C0CB939A1B0ADF010079C45B /* soundapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = soundapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -275,8 +285,13 @@
 				C0CC9D641B20274D00C85A88 /* Icon-Small@2x.png */,
 				C0CC9D651B20274D00C85A88 /* Icon-Small@3x.png */,
 				C0CC9D5E1B20273A00C85A88 /* Icon-Small-40@2x.png */,
+				C0C782BA1B2554F200E8DE74 /* navaddsound.png */,
 				C0CC9D5F1B20273A00C85A88 /* Icon-Small-40@3x.png */,
 				C0CC9D501B20241F00C85A88 /* audioncesplashscreen.png */,
+				C0C782C11B2557B900E8DE74 /* friendsnav.png */,
+				C0C782BF1B25573200E8DE74 /* addfriendsnav.png */,
+				C0C782B81B2553FC00E8DE74 /* navaudionce.png */,
+				C0C782BC1B25556700E8DE74 /* navprofile.png */,
 				C0DD95971B0C5FFE00CB6DFC /* me.jpg */,
 			);
 			name = images;
@@ -369,10 +384,15 @@
 				C0CC9D681B20274D00C85A88 /* Icon-Small@2x.png in Resources */,
 				C0CC9D511B20241F00C85A88 /* audioncesplashscreen.png in Resources */,
 				C0CB93AD1B0ADF010079C45B /* LaunchScreen.xib in Resources */,
+				C0C782C21B2557B900E8DE74 /* friendsnav.png in Resources */,
+				C0C782BD1B25556700E8DE74 /* navprofile.png in Resources */,
+				C0C782C01B25573200E8DE74 /* addfriendsnav.png in Resources */,
 				C0CB94041B0AE1CF0079C45B /* Main.storyboard in Resources */,
 				C0CC9D671B20274D00C85A88 /* Icon-60@3x.png in Resources */,
+				C0C782BB1B2554F200E8DE74 /* navaddsound.png in Resources */,
 				C0CB93AA1B0ADF010079C45B /* Images.xcassets in Resources */,
 				C0CC9D661B20274D00C85A88 /* Icon-60@2x.png in Resources */,
+				C0C782B91B2553FC00E8DE74 /* navaudionce.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

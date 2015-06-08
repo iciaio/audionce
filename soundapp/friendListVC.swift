@@ -17,6 +17,13 @@ class friendListVC: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 110, height: 22))
+        imageView.contentMode = .ScaleAspectFit
+        let image = UIImage(named: "friendsnav.png")
+        imageView.image = image
+        navigationItem.titleView = imageView
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadList:",name:"reloadFriendListVC", object: nil)
         self.setFriends()
     }

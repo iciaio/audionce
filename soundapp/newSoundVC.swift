@@ -27,6 +27,12 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 22))
+        imageView.contentMode = .ScaleAspectFit
+        let image = UIImage(named: "navaddsound.png")
+        imageView.image = image
+        navigationItem.titleView = imageView
+        
         recordStopButton.setTitle("Record", forState: UIControlState.Normal)
         playPauseButton.setTitle("Play", forState: UIControlState.Normal)
         playPauseButton.enabled = false

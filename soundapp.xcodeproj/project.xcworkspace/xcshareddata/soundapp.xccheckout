@@ -7,22 +7,18 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>9B3A8997-2169-4D27-8F81-810D17C39ED0</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>soundapp</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>2470843F2240F35A2F17E4ACFE14C9BF886F63A2</key>
 		<string>https://github.com/iciaio/audionce.git</string>
-		<key>41B6AAF13DDD0843C53146C4DE326E238AADD4BF</key>
-		<string>https://github.com/iciaio/soundapp.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>soundapp.xcodeproj/project.xcworkspace</string>
+	<string>soundapp.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>2470843F2240F35A2F17E4ACFE14C9BF886F63A2</key>
 		<string>../..</string>
-		<key>41B6AAF13DDD0843C53146C4DE326E238AADD4BF</key>
-		<string>../../../soundapp</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/iciaio/audionce.git</string>
@@ -32,14 +28,6 @@
 	<string>2470843F2240F35A2F17E4ACFE14C9BF886F63A2</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>41B6AAF13DDD0843C53146C4DE326E238AADD4BF</string>
-			<key>IDESourceControlWCCName</key>
-			<string>soundapp</string>
-		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
