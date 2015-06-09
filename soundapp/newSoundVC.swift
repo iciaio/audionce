@@ -75,7 +75,9 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
         if recorder == nil { //BEGIN RECORDING
             println("recording. recorder nil")
             submitButton.enabled = false
-            recordStopButton.setTitle("Stop", forState:.Normal)
+            var stop = UIImage(named: "stoprecording.png") as UIImage!
+            recordStopButton.setImage(stop, forState: UIControlState.Normal)
+            //recordStopButton.setTitle("Stop", forState:.Normal)
             playPauseButton.enabled = false
             recordWithPermission(true)
             return
@@ -85,7 +87,10 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
             println("stopping")
             recorder.stop()
             playPauseButton.enabled = true
-            recordStopButton.setTitle("Record", forState:.Normal)
+            submitButton.enabled = false
+            var recording = UIImage(named: "recording") as UIImage!
+            recordStopButton.setImage(recording, forState: UIControlState.Normal)
+            //recordStopButton.setTitle("Record", forState:.Normal)
             let session:AVAudioSession = AVAudioSession.sharedInstance()
             var error: NSError?
             if !session.setActive(false, error: &error) {
@@ -105,12 +110,16 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
         println("playing")
         if player != nil && player.playing { //STOP PLAYBACK
             println("pausing")
-            playPauseButton.setTitle("Play", forState: UIControlState.Normal)
+            var play = UIImage(named: "playaudio.png") as UIImage!
+            playPauseButton.setImage(play, forState: UIControlState.Normal)
+            //playPauseButton.setTitle("Play", forState: UIControlState.Normal)
             player.pause()
             
         } else { //PLAYBACK
             println("playing")
-            playPauseButton.setTitle("Pause", forState: UIControlState.Normal)
+            var pause = UIImage(named: "pauseaudio.png") as UIImage!
+            playPauseButton.setImage(pause, forState: UIControlState.Normal)
+            //playPauseButton.setTitle("Pause", forState: UIControlState.Normal)
             
             if player == nil {
                 var error: NSError?
@@ -240,7 +249,9 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     }
     
     func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
-        playPauseButton.setTitle("Play", forState: UIControlState.Normal)
+        //playPauseButton.setTitle("Play", forState: UIControlState.Normal)
+        var play = UIImage(named: "playaudio.png") as UIImage!
+        playPauseButton.setImage(play, forState: UIControlState.Normal)
     }
     
     func recordWithPermission(setup:Bool) {

@@ -20,6 +20,10 @@
 		C0C782C01B25573200E8DE74 /* addfriendsnav.png in Resources */ = {isa = PBXBuildFile; fileRef = C0C782BF1B25573200E8DE74 /* addfriendsnav.png */; };
 		C0C782C21B2557B900E8DE74 /* friendsnav.png in Resources */ = {isa = PBXBuildFile; fileRef = C0C782C11B2557B900E8DE74 /* friendsnav.png */; };
 		C0C863EF1B1AC04C007BDE5E /* myRequestedUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C863EE1B1AC04C007BDE5E /* myRequestedUserCell.swift */; };
+		C0C8B1A71B26B793001487DF /* recording.png in Resources */ = {isa = PBXBuildFile; fileRef = C0C8B1A61B26B792001487DF /* recording.png */; };
+		C0C8B1A91B26B799001487DF /* stoprecording.png in Resources */ = {isa = PBXBuildFile; fileRef = C0C8B1A81B26B799001487DF /* stoprecording.png */; };
+		C0C8B1AB1B26B7A3001487DF /* playaudio.png in Resources */ = {isa = PBXBuildFile; fileRef = C0C8B1AA1B26B7A3001487DF /* playaudio.png */; };
+		C0C8B1AD1B26B7AA001487DF /* pauseaudio.png in Resources */ = {isa = PBXBuildFile; fileRef = C0C8B1AC1B26B7AA001487DF /* pauseaudio.png */; };
 		C0CA36431B1926CF0094C498 /* requestedUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CA36421B1926CF0094C498 /* requestedUserCell.swift */; };
 		C0CB5D341B25624800DD8578 /* editpencil.png in Resources */ = {isa = PBXBuildFile; fileRef = C0CB5D331B25624800DD8578 /* editpencil.png */; };
 		C0CB93A01B0ADF010079C45B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CB939F1B0ADF010079C45B /* AppDelegate.swift */; };
@@ -81,6 +85,10 @@
 		C0C782BF1B25573200E8DE74 /* addfriendsnav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addfriendsnav.png; sourceTree = "<group>"; };
 		C0C782C11B2557B900E8DE74 /* friendsnav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friendsnav.png; sourceTree = "<group>"; };
 		C0C863EE1B1AC04C007BDE5E /* myRequestedUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myRequestedUserCell.swift; sourceTree = "<group>"; };
+		C0C8B1A61B26B792001487DF /* recording.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recording.png; sourceTree = "<group>"; };
+		C0C8B1A81B26B799001487DF /* stoprecording.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stoprecording.png; sourceTree = "<group>"; };
+		C0C8B1AA1B26B7A3001487DF /* playaudio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playaudio.png; sourceTree = "<group>"; };
+		C0C8B1AC1B26B7AA001487DF /* pauseaudio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseaudio.png; sourceTree = "<group>"; };
 		C0CA36421B1926CF0094C498 /* requestedUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = requestedUserCell.swift; sourceTree = "<group>"; };
 		C0CB5D331B25624800DD8578 /* editpencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editpencil.png; sourceTree = "<group>"; };
 		C0CB939A1B0ADF010079C45B /* soundapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = soundapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -296,6 +304,10 @@
 				C0C782BC1B25556700E8DE74 /* navprofile.png */,
 				C0CB5D331B25624800DD8578 /* editpencil.png */,
 				C0DD95971B0C5FFE00CB6DFC /* me.jpg */,
+				C0C8B1A61B26B792001487DF /* recording.png */,
+				C0C8B1A81B26B799001487DF /* stoprecording.png */,
+				C0C8B1AC1B26B7AA001487DF /* pauseaudio.png */,
+				C0C8B1AA1B26B7A3001487DF /* playaudio.png */,
 			);
 			name = images;
 			sourceTree = "<group>";
@@ -386,13 +398,17 @@
 				C0CC9D611B20273A00C85A88 /* Icon-Small-40@3x.png in Resources */,
 				C0CC9D681B20274D00C85A88 /* Icon-Small@2x.png in Resources */,
 				C0CC9D511B20241F00C85A88 /* audioncesplashscreen.png in Resources */,
+				C0C8B1AD1B26B7AA001487DF /* pauseaudio.png in Resources */,
 				C0CB93AD1B0ADF010079C45B /* LaunchScreen.xib in Resources */,
 				C0C782C21B2557B900E8DE74 /* friendsnav.png in Resources */,
+				C0C8B1AB1B26B7A3001487DF /* playaudio.png in Resources */,
 				C0C782BD1B25556700E8DE74 /* navprofile.png in Resources */,
 				C0C782C01B25573200E8DE74 /* addfriendsnav.png in Resources */,
 				C0CB94041B0AE1CF0079C45B /* Main.storyboard in Resources */,
 				C0CC9D671B20274D00C85A88 /* Icon-60@3x.png in Resources */,
+				C0C8B1A91B26B799001487DF /* stoprecording.png in Resources */,
 				C0C782BB1B2554F200E8DE74 /* navaddsound.png in Resources */,
+				C0C8B1A71B26B793001487DF /* recording.png in Resources */,
 				C0CB93AA1B0ADF010079C45B /* Images.xcassets in Resources */,
 				C0CC9D661B20274D00C85A88 /* Icon-60@2x.png in Resources */,
 				C0CB5D341B25624800DD8578 /* editpencil.png in Resources */,

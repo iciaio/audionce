@@ -75,18 +75,18 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSc-x5-G6I">
-                                <rect key="frame" x="54" y="277" width="105" height="30"/>
-                                <state key="normal" title="Button">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSc-x5-G6I">
+                                <rect key="frame" x="76" y="277" width="55" height="55"/>
+                                <state key="normal" image="recording.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="recordStopAudio:" destination="jtk-Bf-eDn" eventType="touchUpInside" id="7bV-Z3-zoP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cuh-YA-ZUK">
-                                <rect key="frame" x="216" y="277" width="46" height="30"/>
-                                <state key="normal" title="Button">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cuh-YA-ZUK">
+                                <rect key="frame" x="174" y="277" width="55" height="55"/>
+                                <state key="normal" image="playaudio.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -558,6 +558,10 @@
             <point key="canvasLocation" x="885" y="1046"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="playaudio.png" width="200" height="200"/>
+        <image name="recording.png" width="200" height="200"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
@@ -566,7 +570,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="fCo-6W-zNn"/>
         <segue reference="B6k-PE-Ijn"/>
-        <segue reference="wpq-Dp-2c7"/>
+        <segue reference="skG-5F-pzo"/>
         <segue reference="9vi-et-TO4"/>
     </inferredMetricsTieBreakers>
 </document>
