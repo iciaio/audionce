@@ -35,7 +35,7 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
             
             var timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: Selector("clearAndRepopulateAnnotations"), userInfo: nil, repeats: true)
             locationManager = CLLocationManager()
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest;
             locationManager.requestAlwaysAuthorization()
             locationManager.distanceFilter = 1.0;
             mapView.showsUserLocation = true
@@ -117,7 +117,7 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
                         
                         //want to check if sound!["location"] is close enough to userlocation
 
-                        if (userGeoPoint!.distanceInKilometersTo(loc) < 0.01) { //this is 10 meters
+                        if (userGeoPoint!.distanceInKilometersTo(loc) < 0.02) { //this is 20 meters
                             println("less than 10m away")
                             audioFile.getDataInBackgroundWithBlock({
                                 (soundData: NSData?, error: NSError?) -> Void in
@@ -146,12 +146,18 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
     func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
 
         currentLocation = CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude)
-        getClosestSound()
-        if (self.player != nil){
-            self.player = AVAudioPlayer()
+        if (self.player == nil){
+            getClosestSound()
+        } else { //if player is not nil, a sound is playing so do not update location
+            self.locationManager.stopUpdatingLocation()
         }
         //play closest sound if within min distance to closest coord
         //if
+    }
+    
+    func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
+        self.player = AVAudioPlayer()
+        self.locationManager.startUpdatingLocation()
     }
     
     override func didReceiveMemoryWarning() {

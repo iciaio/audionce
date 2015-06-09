@@ -24,7 +24,7 @@ class friendListCell: UITableViewCell {
         query!.whereKey("username", equalTo: self.userNameLabel.text!)
         query!.getFirstObjectInBackgroundWithBlock{
             (user: AnyObject?, error: NSError?) -> Void in
-            if !(error != nil) {
+            if (error == nil) {
                 self.friend = user as! PFUser!
                 self.deleteFromEachFriendTable()
             }

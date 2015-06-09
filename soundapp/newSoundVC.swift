@@ -167,6 +167,7 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
                                     println("1")
                                     self.addToUserSoundArray(newSound)
                                     println("2")
+                                    self.deleteNearbySounds(geoPoint!, soundId: newSound.objectId!)
                                     self.performSegueWithIdentifier("to_main_from_submit", sender: self)
                                 } else {
                                     println("error saving sound")
@@ -180,6 +181,24 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
             }
         }
     }
+    
+    func deleteNearbySounds(userGeoPoint: PFGeoPoint, soundId: String) {
+    
+        var soundQuery = PFQuery(className:"Sounds")
+        soundQuery.whereKey("location", nearGeoPoint:userGeoPoint)
+        soundQuery.findObjectsInBackgroundWithBlock {(sounds: [AnyObject]?, error: NSError?) -> Void in
+            if (error == nil){
+                for sound in sounds as! [PFObject]{
+                    let nearbySoundPoint = sound["location"] as! PFGeoPoint
+                    if (userGeoPoint.distanceInKilometersTo(nearbySoundPoint) < 0.030) &&
+                        (sound.objectId! != soundId) {
+                        sound.deleteInBackground()
+                    }
+                }
+            }
+        }
+    }
+    
     //faith is when you belive something determines the undeterminable, not that everything is inherently determinable (though perhaps not by us). the latter is science
 
     func addToUserSoundArray(soundObject : PFObject){
