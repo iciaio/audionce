@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import CoreGraphics
 
 class loginVC: UIViewController {
 
@@ -16,6 +17,7 @@ class loginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor(red:199.0/255.0, green:190.0/255.0, blue:216.0/255.0, alpha:1.0)
         // Do any additional setup after loading the view.
     }
 

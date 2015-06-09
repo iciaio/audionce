@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import AVFoundation
+import CoreGraphics
 
 class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelegate {
     
