@@ -59,6 +59,8 @@
 		C0CC9D681B20274D00C85A88 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C0CC9D641B20274D00C85A88 /* Icon-Small@2x.png */; };
 		C0CC9D691B20274D00C85A88 /* Icon-Small@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C0CC9D651B20274D00C85A88 /* Icon-Small@3x.png */; };
 		C0DD95981B0C5FFE00CB6DFC /* me.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0DD95971B0C5FFE00CB6DFC /* me.jpg */; };
+		C0F59DC71B27A17800632E2B /* chooseFriendsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F59DC61B27A17800632E2B /* chooseFriendsVC.swift */; };
+		C0F59DC91B27A2FD00632E2B /* chooseFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F59DC81B27A2FD00632E2B /* chooseFriendsCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +130,8 @@
 		C0CC9D641B20274D00C85A88 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		C0CC9D651B20274D00C85A88 /* Icon-Small@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@3x.png"; sourceTree = "<group>"; };
 		C0DD95971B0C5FFE00CB6DFC /* me.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = me.jpg; sourceTree = "<group>"; };
+		C0F59DC61B27A17800632E2B /* chooseFriendsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = chooseFriendsVC.swift; sourceTree = "<group>"; };
+		C0F59DC81B27A2FD00632E2B /* chooseFriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = chooseFriendsCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +201,8 @@
 			isa = PBXGroup;
 			children = (
 				C0CB93F51B0AE0840079C45B /* newSoundVC.swift */,
+				C0F59DC61B27A17800632E2B /* chooseFriendsVC.swift */,
+				C0F59DC81B27A2FD00632E2B /* chooseFriendsCell.swift */,
 			);
 			name = Sound;
 			sourceTree = "<group>";
@@ -441,10 +447,12 @@
 				C0CB93FB1B0AE0E30079C45B /* friendListVC.swift in Sources */,
 				C0CB93FD1B0AE0E30079C45B /* profileVC.swift in Sources */,
 				C08C3EAE1B24D7A600C13C4F /* userSoundsTableVC.swift in Sources */,
+				C0F59DC71B27A17800632E2B /* chooseFriendsVC.swift in Sources */,
 				C0C436291B178E8C0045CB63 /* addFriendVC.swift in Sources */,
 				C0CB93FC1B0AE0E30079C45B /* loginVC.swift in Sources */,
 				C0CB93FE1B0AE0E30079C45B /* signupVC.swift in Sources */,
 				C0CB93A31B0ADF010079C45B /* soundapp.xcdatamodeld in Sources */,
+				C0F59DC91B27A2FD00632E2B /* chooseFriendsCell.swift in Sources */,
 				C0CA36431B1926CF0094C498 /* requestedUserCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
