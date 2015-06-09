@@ -19,30 +19,34 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
     var currentLocation = CLLocationCoordinate2D()
     var oldAnnotationDict = Dictionary<String, MKAnnotation>()
     var newAnnotationDict = Dictionary<String, MKAnnotation>()
-    var player =  AVAudioPlayer()
+    var player : AVAudioPlayer!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if (PFUser.currentUser() == nil){
+            self.performSegueWithIdentifier("goto_login", sender: self)
+        } else {
         
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 85, height: 22))
-        imageView.contentMode = .ScaleAspectFit
-        let image = UIImage(named: "navaudionce.png")
-        imageView.image = image
-        navigationItem.titleView = imageView
-        
-        var timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: Selector("clearAndRepopulateAnnotations"), userInfo: nil, repeats: true)
-        locationManager = CLLocationManager()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        locationManager.requestAlwaysAuthorization()
-        locationManager.distanceFilter = 1.0;
-        mapView.showsUserLocation = true
-        mapView.delegate = self
-        locationManager.startUpdatingLocation()
-        var locValue:CLLocationCoordinate2D = locationManager.location.coordinate
-        println(locationManager.location)
-        mapView.setRegion(MKCoordinateRegionMakeWithDistance(locValue, 400, 400), animated: true)
-        queryForAnnotations()
-        getClosestSound()
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 85, height: 22))
+            imageView.contentMode = .ScaleAspectFit
+            let image = UIImage(named: "navaudionce.png")
+            imageView.image = image
+            navigationItem.titleView = imageView
+            
+            var timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: Selector("clearAndRepopulateAnnotations"), userInfo: nil, repeats: true)
+            locationManager = CLLocationManager()
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+            locationManager.requestAlwaysAuthorization()
+            locationManager.distanceFilter = 1.0;
+            mapView.showsUserLocation = true
+            mapView.delegate = self
+            locationManager.startUpdatingLocation()
+            var locValue:CLLocationCoordinate2D = locationManager.location.coordinate
+            println(locationManager.location)
+            mapView.setRegion(MKCoordinateRegionMakeWithDistance(locValue, 400, 400), animated: true)
+            queryForAnnotations()
+            getClosestSound()
+        }
     }
     
     func clearAndRepopulateAnnotations(){
@@ -107,23 +111,31 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
                     if error != nil || sound == nil {
                         println("The getClosestSound request failed.")
                     } else {
-                        // The find succeeded.
+                        
                         let audioFile: PFFile = sound!["file"] as! PFFile
                         let loc = sound!["location"] as! PFGeoPoint
-                        audioFile.getDataInBackgroundWithBlock({
-                            (soundData: NSData?, error: NSError?) -> Void in
-                            if (error == nil) {
-                                
-                                dispatch_async(dispatch_get_main_queue()) {
-                                    self.player = AVAudioPlayer(data: soundData, error: nil)
-                                    self.player.delegate = self
-                                    self.player.play()
+                        
+                        //want to check if sound!["location"] is close enough to userlocation
+
+                        if (userGeoPoint!.distanceInKilometersTo(loc) < 0.01) { //this is 10 meters
+                            println("less than 10m away")
+                            audioFile.getDataInBackgroundWithBlock({
+                                (soundData: NSData?, error: NSError?) -> Void in
+                                if (error == nil) {
+                                    
+                                    dispatch_async(dispatch_get_main_queue()) {
+                                        self.player = AVAudioPlayer(data: soundData!, error: nil)
+                                        self.player.delegate = self
+                                        self.player.play()
+                                    }
+                                    
+                                } else {
+                                    println("error")
                                 }
-                                
-                            } else {
-                                println("error")
-                            }
-                        })
+                            })
+                        
+                        }
+                        
                     }
                 }
             }
@@ -135,6 +147,9 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
 
         currentLocation = CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude)
         getClosestSound()
+        if (self.player != nil){
+            self.player = AVAudioPlayer()
+        }
         //play closest sound if within min distance to closest coord
         //if
     }
