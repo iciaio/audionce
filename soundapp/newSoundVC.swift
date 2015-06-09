@@ -183,7 +183,6 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     }
     
     func deleteNearbySounds(userGeoPoint: PFGeoPoint, soundId: String) {
-    
         var soundQuery = PFQuery(className:"Sounds")
         soundQuery.whereKey("location", nearGeoPoint:userGeoPoint)
         soundQuery.findObjectsInBackgroundWithBlock {(sounds: [AnyObject]?, error: NSError?) -> Void in
@@ -192,13 +191,21 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
                     let nearbySoundPoint = sound["location"] as! PFGeoPoint
                     if (userGeoPoint.distanceInKilometersTo(nearbySoundPoint) < 0.030) &&
                         (sound.objectId! != soundId) {
-                        sound.deleteInBackground()
+                            
+                            var alertView:UIAlertView = UIAlertView()
+                            alertView.title = "Overwriting nearby sound."
+                            alertView.message = "We're just making room for you!:)"
+                            alertView.delegate = self
+                            alertView.addButtonWithTitle("OK")
+                            alertView.show()
+                            
+                            sound.deleteInBackground()
                     }
                 }
             }
         }
     }
-    
+
     //faith is when you belive something determines the undeterminable, not that everything is inherently determinable (though perhaps not by us). the latter is science
 
     func addToUserSoundArray(soundObject : PFObject){
@@ -206,7 +213,6 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
         let currentUser = PFUser.currentUser()
         currentUser!.addObject(soundObject, forKey: "sounds")
         currentUser!.saveInBackground()
-        println("Tadaaahhhh")
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
