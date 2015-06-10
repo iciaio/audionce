@@ -22,6 +22,7 @@ class userSoundsTableVC: UITableViewController {
     }
     
     func setSounds(){
+        self.soundArray = []
         var sounds = self.currentUser!["sounds"] as! [PFObject]
         for sound in sounds {
             sound.fetchIfNeededInBackgroundWithBlock({
