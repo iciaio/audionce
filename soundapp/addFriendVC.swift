@@ -127,16 +127,18 @@ class addFriendVC: UITableViewController, UISearchBarDelegate, UITableViewDataSo
     }
     
     func populateAlreadyFriends(){
-        var friends = self.currentUser?["friends"] as! PFObject
-        friends.fetchIfNeededInBackgroundWithBlock({
-            (object, error) -> Void in
-            if (error == nil){
-                self.alreadyFriends = friends["all_friends"]! as! [PFUser]
-                self.populateUnrelatedUsers()
-            } else {
-                println("error getting people already friends for search view")
-            }
-        })
+        if let currentUserFriends = self.currentUser?["friends"] as? PFObject{
+            var friends = currentUserFriends
+            friends.fetchIfNeededInBackgroundWithBlock({
+                (object, error) -> Void in
+                if (error == nil){
+                    self.alreadyFriends = friends["all_friends"]! as! [PFUser]
+                    self.populateUnrelatedUsers()
+                } else {
+                    println("error getting people already friends for search view")
+                }
+            })
+        }
     }
     
     func populateUnrelatedUsers() { //These users will show up in search

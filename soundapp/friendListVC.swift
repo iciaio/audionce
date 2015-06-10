@@ -29,16 +29,18 @@ class friendListVC: UITableViewController {
     }
     
     func setFriends(){
-        var friends = self.currentUser?["friends"] as! PFObject
-        friends.fetchIfNeededInBackgroundWithBlock({
-            (object, error) -> Void in
-            if (error == nil){
-                self.friendArray = friends["all_friends"]! as! [PFUser]
-                println(self.friendArray.count)
-                
-                self.tableView.reloadData()
-            }
-        })
+        if let currentUserFriends = self.currentUser?["friends"] as? PFObject{
+            var friends = currentUserFriends
+            friends.fetchIfNeededInBackgroundWithBlock({
+                (object, error) -> Void in
+                if (error == nil){
+                    self.friendArray = friends["all_friends"]! as! [PFUser]
+                    println(self.friendArray.count)
+                    
+                    self.tableView.reloadData()
+                }
+            })
+        }
     }
     
     func loadList(notification: NSNotification){

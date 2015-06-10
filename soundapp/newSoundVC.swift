@@ -24,9 +24,12 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     var soundFileURL = NSURL()
     var soundFilePath = ""
     var meterTimer:NSTimer!
-
+    var shareWithUserNames: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateUserArray:",name:"userArrayUpdate", object: nil)
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 22))
         imageView.contentMode = .ScaleAspectFit
@@ -39,6 +42,14 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
         playPauseButton.enabled = false
         submitButton.enabled = false
         setSessionPlayback()
+    }
+    
+    func updateUserArray(notification:NSNotification) {
+        let userInfo:Dictionary<String,[String]!> = notification.userInfo as! Dictionary<String,[String]!>
+        println("heyooo")
+//        if let userArray = userInfo["userArray"]! {
+//            self.shareWithUserNames = userArray
+//        }
     }
 
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
@@ -152,7 +163,6 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
             alertView.addButtonWithTitle("OK")
             alertView.show()
         } else {
-        
             let fileData = NSData(contentsOfURL: soundFileURL)
             let parseFile = PFFile(name: "sound.aac", data: fileData!)
             parseFile.saveInBackgroundWithBlock {
@@ -165,6 +175,7 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
                             newSound["file"] = parseFile
                             newSound["title"] = self.titleTextField.text
                             newSound["location"] = geoPoint
+                            newSound["user"] = PFUser.currentUser()
                             newSound.saveInBackgroundWithBlock {
                                 (success: Bool, error: NSError?) -> Void in
                                 if (success) {
@@ -174,9 +185,8 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
                                     self.playPauseButton.enabled = false
                                     self.submitButton.enabled = false
                                     self.titleTextField.text = ""
-                                    println("1")
                                     self.addToUserSoundArray(newSound)
-                                    println("2")
+                                    self.makeSoundVisibleToUsers(newSound)
                                     self.deleteNearbySounds(geoPoint!, soundId: newSound.objectId!)
                                     self.performSegueWithIdentifier("to_main_from_submit", sender: self)
                                 } else {
@@ -190,6 +200,10 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
                 }
             }
         }
+    }
+    
+    func makeSoundVisibleToUsers(soundObject: PFObject){
+        println("making sound visible to other users")
     }
     
     func deleteNearbySounds(userGeoPoint: PFGeoPoint, soundId: String) {

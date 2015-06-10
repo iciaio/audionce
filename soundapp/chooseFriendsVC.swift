@@ -15,6 +15,7 @@ class chooseFriendsVC: UICollectionViewController {
     
     var currentUser = PFUser.currentUser()
     var friendArray = [PFUser]()
+    var selectedUserArray = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,17 +31,18 @@ class chooseFriendsVC: UICollectionViewController {
     }
     
     func setFriends(){
-        println("setting friends")
-        var friends = self.currentUser?["friends"] as! PFObject
-        friends.fetchIfNeededInBackgroundWithBlock({
-            (object, error) -> Void in
-            if (error == nil){
-                self.friendArray = friends["all_friends"]! as! [PFUser]
-                println(self.friendArray.count)
-                
-                self.collectionView?.reloadData()
-            }
-        })
+        if let currentUserFriends = self.currentUser?["friends"] as? PFObject{
+            var friends = currentUserFriends
+            friends.fetchIfNeededInBackgroundWithBlock({
+                (object, error) -> Void in
+                if (error == nil){
+                    self.friendArray = friends["all_friends"]! as! [PFUser]
+                    println(self.friendArray.count)
+                    
+                    self.collectionView?.reloadData()
+                }
+            })
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -89,12 +91,30 @@ class chooseFriendsVC: UICollectionViewController {
                 }
             }
         })
-    
-        // Configure the cell
-    
+        
         return cell
     }
 
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! chooseFriendsCell?
+        let user = cell?.userNameLabel.text
+        if contains(self.selectedUserArray, user!){
+            let foundIndex = find(self.selectedUserArray, user!)
+            self.selectedUserArray.removeAtIndex(foundIndex!)
+            println(self.selectedUserArray)
+        } else {
+            self.selectedUserArray.append(user!)
+            println(self.selectedUserArray)
+        }
+        if contains(self.selectedUserArray, cell!.userNameLabel.text!) {
+            cell!.contentView.backgroundColor = UIColor.blackColor()
+        } else {
+            cell!.contentView.backgroundColor = UIColor.whiteColor()
+        }
+        NSNotificationCenter.defaultCenter().postNotificationName("userArrayUpdate", object: nil, userInfo:["userArray":self.selectedUserArray])
+
+    }
+    
     // MARK: UICollectionViewDelegate
 
     /*
