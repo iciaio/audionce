@@ -101,10 +101,10 @@ class chooseFriendsVC: UICollectionViewController {
         if contains(self.selectedUserArray, user!){
             let foundIndex = find(self.selectedUserArray, user!)
             self.selectedUserArray.removeAtIndex(foundIndex!)
-            println(self.selectedUserArray)
+//            println(self.selectedUserArray)
         } else {
             self.selectedUserArray.append(user!)
-            println(self.selectedUserArray)
+//            println(self.selectedUserArray)
         }
         if contains(self.selectedUserArray, cell!.userNameLabel.text!) {
             cell!.contentView.backgroundColor = UIColor.blackColor()

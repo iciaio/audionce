@@ -24,7 +24,7 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     var soundFileURL = NSURL()
     var soundFilePath = ""
     var meterTimer:NSTimer!
-    var shareWithUserNames: [String] = []
+    var shareWith: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,10 +46,10 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     
     func updateUserArray(notification:NSNotification) {
         let userInfo:Dictionary<String,[String]!> = notification.userInfo as! Dictionary<String,[String]!>
-        println("heyooo")
-//        if let userArray = userInfo["userArray"]! {
-//            self.shareWithUserNames = userArray
-//        }
+        if let userArray = userInfo["userArray"]! {
+            println(userArray)
+            self.shareWith = userArray
+        }
     }
 
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
@@ -186,8 +186,9 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
                                     self.submitButton.enabled = false
                                     self.titleTextField.text = ""
                                     self.addToUserSoundArray(newSound)
-                                    self.makeSoundVisibleToUsers(newSound)
-                                    self.deleteNearbySounds(geoPoint!, soundId: newSound.objectId!)
+                                    println(self.shareWith)
+                                    //self.makeSoundVisibleToUsers(newSound)
+                                    //self.deleteNearbySounds(geoPoint!, soundId: newSound.objectId!)
                                     self.performSegueWithIdentifier("to_main_from_submit", sender: self)
                                 } else {
                                     println("error saving sound")
@@ -202,10 +203,52 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
         }
     }
     
+    //THIS FUNCTION IS NEVER CALLED
     func makeSoundVisibleToUsers(soundObject: PFObject){
-        println("making sound visible to other users")
+        println("making sound visible")
+        if (self.shareWith.count == 0) {
+            var alertView:UIAlertView = UIAlertView()
+            alertView.title = "No shared users"
+            alertView.message = "You will be the only person to hear this sound."
+            alertView.delegate = self
+            alertView.addButtonWithTitle("OK")
+            alertView.show()
+        } else {
+            println("multiple users selected")
+        }
+        let currentUser = PFUser.currentUser()!
+        var mySounds: [PFObject] = currentUser["observable_sounds"] as! [PFObject]
+        mySounds.append(soundObject)
+        currentUser["observable_sounds"] = mySounds
+        currentUser.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+            if success {
+//                for user in self.shareWith {
+//                    var query = PFUser.query()
+//                    query!.whereKey("username", equalTo: user)
+//                    query!.getFirstObjectInBackgroundWithBlock{
+//                        (user: AnyObject?, error: NSError?) -> Void in
+//                        if (error == nil) {
+//                            if let user = user as? PFUser{
+//                                var userObservableSounds: [PFObject] = user["observable_sounds"] as! [PFObject]
+//                                userObservableSounds.append(soundObject)
+//                                user["observables_sounds"] = userObservableSounds
+//                            }
+//                        }
+//                        else{
+//                            println("error querying for friend to share sound with")
+//                            println(error)
+//                        }
+//                    }
+//                }
+                println("successfully saved one user")
+            } else {
+                println(error)
+            }
+        }
+        
     }
     
+    //THIS FUNCTION IS NEVER CALLED
     func deleteNearbySounds(userGeoPoint: PFGeoPoint, soundId: String) {
         var soundQuery = PFQuery(className:"Sounds")
         soundQuery.whereKey("location", nearGeoPoint:userGeoPoint)

@@ -57,17 +57,6 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
         PFGeoPoint.geoPointForCurrentLocationInBackground {
             (userGeoPoint: PFGeoPoint?, error: NSError?) -> Void in
             if error == nil {
-                let currentUser = PFUser.currentUser()
-                var sounds = currentUser!["observable_sounds"] as! [PFObject]
-                for sound in sounds {
-                    sound.fetchIfNeededInBackgroundWithBlock({
-                        (object, error) -> Void in
-                        if (error == nil){
-                            println(sound["title"])
-                        }
-                    })
-                }
-                
                 var soundQuery = PFQuery(className:"Sounds")
                 soundQuery.whereKey("location", nearGeoPoint:userGeoPoint!)
                 soundQuery.findObjectsInBackgroundWithBlock {
