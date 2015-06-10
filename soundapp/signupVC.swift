@@ -97,11 +97,9 @@ class signupVC: UIViewController {
                         if (success) {
                             
                             var soundList: [PFObject] = []
-                            var observableSounds: [PFObject] = []
                             
                             user["sounds"] = soundList
                             user["friends"] = friendTable
-                            user["observable_sounds"] = observableSounds
                             user.saveInBackground()
                             
                             self.performSegueWithIdentifier("to_main_from_signup", sender: self)
