@@ -95,15 +95,15 @@ class signupVC: UIViewController {
                     friendTable.saveInBackgroundWithBlock {
                         (success: Bool, error: NSError?) -> Void in
                         if (success) {
-                            
                             var soundList: [PFObject] = []
+                            var sharedSounds: [PFObject] = []
                             
                             user["sounds"] = soundList
                             user["friends"] = friendTable
+                            user["observable_sounds"] = sharedSounds
                             user.saveInBackground()
                             
                             self.performSegueWithIdentifier("to_main_from_signup", sender: self)
-
                         } else {
                             println("signup failed!")
                         }

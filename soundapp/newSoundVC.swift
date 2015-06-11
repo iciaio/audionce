@@ -1,5 +1,4 @@
 //
-//  loginVC.swift
 //  navigating
 //
 //  Created by Alicia Iott on 5/16/15.
@@ -18,6 +17,7 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     @IBOutlet weak var recordStopButton: UIButton!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var privacyToggle: UISegmentedControl!
     
     var player: AVAudioPlayer!
     var recorder: AVAudioRecorder!
@@ -25,6 +25,7 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     var soundFilePath = ""
     var meterTimer:NSTimer!
     var shareWith: [String] = []
+    var shareWithUsers: [PFUser] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +43,15 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
         playPauseButton.enabled = false
         submitButton.enabled = false
         setSessionPlayback()
+    }
+    
+    @IBAction func publicPrivateToggle(sender: AnyObject) {
+        println("toggled")
+        if (self.privacyToggle.selectedSegmentIndex == 0){
+            print("private sound")
+        } else {
+            print("public sound")
+        }
     }
     
     func updateUserArray(notification:NSNotification) {
@@ -155,6 +165,8 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     @IBAction func submitAudio(sender: AnyObject) {
         var error: NSError?
         
+        println("submitting")
+        
         if (self.titleTextField.text == ""){
             var alertView:UIAlertView = UIAlertView()
             alertView.title = "No title"
@@ -163,35 +175,39 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
             alertView.addButtonWithTitle("OK")
             alertView.show()
         } else {
+            
+            //get users from shareWith array
+            //query SharedSounds for that user, put sound in ["sounds"]
+            self.getUsersFromNameArray()
+            println("done with getUsersFromNameArray")
             let fileData = NSData(contentsOfURL: soundFileURL)
             let parseFile = PFFile(name: "sound.aac", data: fileData!)
             parseFile.saveInBackgroundWithBlock {
                 (success: Bool, error: NSError?) -> Void in
                 if (success) {
-                    var newSound = PFObject(className: "Sounds")
                     PFGeoPoint.geoPointForCurrentLocationInBackground {
                         (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
                         if error == nil {
+                            var newSound = PFObject(className: "Sounds")
                             newSound["file"] = parseFile
                             newSound["title"] = self.titleTextField.text
                             newSound["location"] = geoPoint
                             newSound["user"] = PFUser.currentUser()
+                            if (self.privacyToggle.selectedSegmentIndex == 0){
+                                newSound["is_private"] = true
+                                newSound["to"] = self.shareWithUsers
+                            }
+                            else{
+                                newSound["is_private"] = false
+                            }
                             newSound.saveInBackgroundWithBlock {
                                 (success: Bool, error: NSError?) -> Void in
                                 if (success) {
-                                    println("submit pressed")
-                                    self.player = nil
-                                    self.recorder = nil
-                                    self.playPauseButton.enabled = false
-                                    self.submitButton.enabled = false
-                                    self.titleTextField.text = ""
-                                    self.addToUserSoundArray(newSound)
-                                    println(self.shareWith)
-                                    //self.makeSoundVisibleToUsers(newSound)
-                                    //self.deleteNearbySounds(geoPoint!, soundId: newSound.objectId!)
+                                    println("sucess saving new sound!")
+                                    self.addToUserSoundArray(newSound) //adds to current user sounds
                                     self.performSegueWithIdentifier("to_main_from_submit", sender: self)
                                 } else {
-                                    println("error saving sound")
+                                    println("error saving sound \(error)")
                                 }
                             }
                         }
@@ -202,85 +218,104 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
             }
         }
     }
-    
-    //THIS FUNCTION IS NEVER CALLED
-    func makeSoundVisibleToUsers(soundObject: PFObject){
-        println("making sound visible")
-        if (self.shareWith.count == 0) {
-            var alertView:UIAlertView = UIAlertView()
-            alertView.title = "No shared users"
-            alertView.message = "You will be the only person to hear this sound."
-            alertView.delegate = self
-            alertView.addButtonWithTitle("OK")
-            alertView.show()
-        } else {
-            println("multiple users selected")
-        }
-        let currentUser = PFUser.currentUser()!
-        var mySounds: [PFObject] = currentUser["observable_sounds"] as! [PFObject]
-        mySounds.append(soundObject)
-        currentUser["observable_sounds"] = mySounds
-        currentUser.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            if success {
-//                for user in self.shareWith {
-//                    var query = PFUser.query()
-//                    query!.whereKey("username", equalTo: user)
-//                    query!.getFirstObjectInBackgroundWithBlock{
-//                        (user: AnyObject?, error: NSError?) -> Void in
-//                        if (error == nil) {
-//                            if let user = user as? PFUser{
-//                                var userObservableSounds: [PFObject] = user["observable_sounds"] as! [PFObject]
-//                                userObservableSounds.append(soundObject)
-//                                user["observables_sounds"] = userObservableSounds
-//                            }
-//                        }
-//                        else{
-//                            println("error querying for friend to share sound with")
-//                            println(error)
-//                        }
-//                    }
-//                }
-                println("successfully saved one user")
-            } else {
-                println(error)
-            }
-        }
-        
-    }
-    
-    //THIS FUNCTION IS NEVER CALLED
-    func deleteNearbySounds(userGeoPoint: PFGeoPoint, soundId: String) {
-        var soundQuery = PFQuery(className:"Sounds")
-        soundQuery.whereKey("location", nearGeoPoint:userGeoPoint)
-        soundQuery.findObjectsInBackgroundWithBlock {(sounds: [AnyObject]?, error: NSError?) -> Void in
-            if (error == nil){
-                for sound in sounds as! [PFObject]{
-                    let nearbySoundPoint = sound["location"] as! PFGeoPoint
-                    if (userGeoPoint.distanceInKilometersTo(nearbySoundPoint) < 0.030) &&
-                        (sound.objectId! != soundId) {
-                            
-                            var alertView:UIAlertView = UIAlertView()
-                            alertView.title = "Overwriting nearby sound."
-                            alertView.message = "We're just making room for you!:)"
-                            alertView.delegate = self
-                            alertView.addButtonWithTitle("OK")
-                            alertView.show()
-                            
-                            sound.deleteInBackground()
-                    }
-                }
-            }
-        }
-    }
-
-    //faith is when you belive something determines the undeterminable, not that everything is inherently determinable (though perhaps not by us). the latter is science
 
     func addToUserSoundArray(soundObject : PFObject){
-        println("3")
+        println("add to user sound array")
         let currentUser = PFUser.currentUser()
         currentUser!.addObject(soundObject, forKey: "sounds")
         currentUser!.saveInBackground()
     }
+    
+    func getUsersFromNameArray() {
+        for username in self.shareWith{
+            var query = PFUser.query()
+            query!.whereKey("username", equalTo: username)
+            query!.getFirstObjectInBackgroundWithBlock{
+                (user: AnyObject?, error: NSError?) -> Void in
+                if (error == nil) {
+                    self.shareWithUsers.append(user as! PFUser)
+                    println(self.shareWithUsers)
+                }
+                else{
+                    println("error querying for friend to share sounds with")
+                    println(error)
+                }
+            }
+        }
+    }
+    
+//    //THIS FUNCTION IS NEVER CALLED
+//    func makeSoundVisibleToUsers(soundObject: PFObject){
+//        println("making sound visible")
+//        if (self.shareWith.count == 0) {
+//            var alertView:UIAlertView = UIAlertView()
+//            alertView.title = "No shared users"
+//            alertView.message = "You will be the only person to hear this sound."
+//            alertView.delegate = self
+//            alertView.addButtonWithTitle("OK")
+//            alertView.show()
+//        } else {
+//            println("multiple users selected")
+//        }
+//        let currentUser = PFUser.currentUser()!
+//        var mySounds: [PFObject] = currentUser["observable_sounds"] as! [PFObject]
+//        mySounds.append(soundObject)
+//        currentUser["observable_sounds"] = mySounds
+//        currentUser.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+//            if success {
+////                for user in self.shareWith {
+////                    var query = PFUser.query()
+////                    query!.whereKey("username", equalTo: user)
+////                    query!.getFirstObjectInBackgroundWithBlock{
+////                        (user: AnyObject?, error: NSError?) -> Void in
+////                        if (error == nil) {
+////                            if let user = user as? PFUser{
+////                                var userObservableSounds: [PFObject] = user["observable_sounds"] as! [PFObject]
+////                                userObservableSounds.append(soundObject)
+////                                user["observables_sounds"] = userObservableSounds
+////                            }
+////                        }
+////                        else{
+////                            println("error querying for friend to share sound with")
+////                            println(error)
+////                        }
+////                    }
+////                }
+//                println("successfully saved one user")
+//            } else {
+//                println(error)
+//            }
+//        }
+//        
+//    }
+    
+    //THIS FUNCTION IS NEVER CALLED
+//    func deleteNearbySounds(userGeoPoint: PFGeoPoint, soundId: String) {
+//        var soundQuery = PFQuery(className:"Sounds")
+//        soundQuery.whereKey("location", nearGeoPoint:userGeoPoint)
+//        soundQuery.findObjectsInBackgroundWithBlock {(sounds: [AnyObject]?, error: NSError?) -> Void in
+//            if (error == nil){
+//                for sound in sounds as! [PFObject]{
+//                    let nearbySoundPoint = sound["location"] as! PFGeoPoint
+//                    if (userGeoPoint.distanceInKilometersTo(nearbySoundPoint) < 0.030) &&
+//                        (sound.objectId! != soundId) {
+//                            
+//                            var alertView:UIAlertView = UIAlertView()
+//                            alertView.title = "Overwriting nearby sound."
+//                            alertView.message = "We're just making room for you!:)"
+//                            alertView.delegate = self
+//                            alertView.addButtonWithTitle("OK")
+//                            alertView.show()
+//                            
+//                            sound.deleteInBackground()
+//                    }
+//                }
+//            }
+//        }
+//    }
+
+    //faith is when you belive something determines the undeterminable, not that everything is inherently determinable (though perhaps not by us). the latter is science
+
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         if let touch = touches.first as? UITouch {
@@ -318,14 +353,11 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
         if (session.respondsToSelector("requestRecordPermission:")) {
             AVAudioSession.sharedInstance().requestRecordPermission({(granted: Bool)-> Void in
                 if granted {
-                    println("Permission to record granted")
                     self.setSessionPlayAndRecord()
                     if setup {
                         self.setupRecorder()
                     }
-                    println("about to record...")
                     self.recorder.record()
-                    println("recording now")
 //                    println("about to meter")
 //                    self.meterTimer = NSTimer.scheduledTimerWithTimeInterval(0.1,
 //                        target:self,
@@ -343,11 +375,9 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     }
     
     func setupRecorder() {
-        println("setting up recorder")
         var format = NSDateFormatter()
         format.dateFormat="yyyy-MM-dd-HH-mm-ss"
         var currentFileName = "recording-\(format.stringFromDate(NSDate())).m4a"
-        println(currentFileName)
         
         var dirPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
         var docsDir: AnyObject = dirPaths[0]
@@ -369,7 +399,6 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
             recorder.delegate = self
             recorder.meteringEnabled = true
             recorder.prepareToRecord() // creates/overwrites the file at soundFileURL
-            println("end of setuprecorder")
         }
     }
 

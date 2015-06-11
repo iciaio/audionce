@@ -73,6 +73,9 @@
                                     <segment title="Public"/>
                                 </segments>
                                 <color key="tintColor" red="0.72941176470000002" green="0.68627450980000004" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="publicPrivateToggle:" destination="jtk-Bf-eDn" eventType="valueChanged" id="obg-0I-wgs"/>
+                                </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSc-x5-G6I">
                                 <rect key="frame" x="80" y="100" width="55" height="55"/>
@@ -120,6 +123,7 @@
                     <navigationItem key="navigationItem" id="sIA-nm-YbF"/>
                     <connections>
                         <outlet property="playPauseButton" destination="Cuh-YA-ZUK" id="r6B-U9-Up8"/>
+                        <outlet property="privacyToggle" destination="0bK-pw-g0i" id="Fpc-uo-wPt"/>
                         <outlet property="recordStopButton" destination="dSc-x5-G6I" id="tUm-zf-HRK"/>
                         <outlet property="submitButton" destination="E1d-PT-m0H" id="h1g-Rb-eD1"/>
                         <outlet property="titleTextField" destination="vYH-QJ-nlQ" id="Iun-Fx-Cb2"/>

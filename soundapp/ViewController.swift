@@ -54,32 +54,44 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
     }
     
     func queryForAnnotations() {
+        //in this function we want the annotations from 
+        //user["observeable_sounds"]  <--private sounds from others
+        //and from user["sounds"] <--sounds i have posted
+        //and from sounds["is_private"] == false <-- sounds that are public
+        //if cloud code does this
         PFGeoPoint.geoPointForCurrentLocationInBackground {
             (userGeoPoint: PFGeoPoint?, error: NSError?) -> Void in
             if error == nil {
+                
                 var soundQuery = PFQuery(className:"Sounds")
                 soundQuery.whereKey("location", nearGeoPoint:userGeoPoint!)
                 soundQuery.findObjectsInBackgroundWithBlock {
                     (sounds: [AnyObject]?, error: NSError?) -> Void in
-                    
+
                     if error == nil {
-                        
+
                         // The find succeeded.
                         for sound in sounds!{
-                            
-                            let identifier = sound.objectId! as String!
-                            if self.oldAnnotationDict[identifier] != nil {
-                                self.newAnnotationDict[identifier] = self.oldAnnotationDict[identifier]
+                            if sound["is_private"] as! Bool == false {
+                                let identifier = sound.objectId! as String!
+                                if self.oldAnnotationDict[identifier] != nil {
+                                    self.newAnnotationDict[identifier] = self.oldAnnotationDict[identifier]
+                                } else {
+                                    //Make annotation.
+                                    let titleString = sound["title"]! as! String
+                                    let loc = sound["location"]! as! PFGeoPoint
+                                    let soundAnnotation = Sound(title: titleString,
+                                        locationName: "some location",
+                                        discipline: "public",
+                                        coordinate: CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude))
+                                    self.newAnnotationDict[identifier] = soundAnnotation
+                                    self.mapView.addAnnotation(soundAnnotation)
+                                } else {
+                                    let
+                                }
                             } else {
-                                //Make annotation.
-                                let titleString = sound["title"]! as! String
-                                let loc = sound["location"]! as! PFGeoPoint
-                                let soundAnnotation = Sound(title: titleString,
-                                    locationName: "some location",
-                                    discipline: "public",
-                                    coordinate: CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude))
-                                self.newAnnotationDict[identifier] = soundAnnotation
-                                self.mapView.addAnnotation(soundAnnotation)
+                                let soundTitle = sound["title"]
+                                println("private sound \(soundTitle)")
                             }
                         }
                         for (identifier, soundAnnotation) in self.oldAnnotationDict {
@@ -97,9 +109,47 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
             }
         }
     }
+//
+//                var soundQuery = PFQuery(className:"Sounds")
+//                soundQuery.whereKey("location", nearGeoPoint:userGeoPoint!)
+//                soundQuery.findObjectsInBackgroundWithBlock {
+//                    (sounds: [AnyObject]?, error: NSError?) -> Void in
+//                    
+//                    if error == nil {
+//                        
+//                        // The find succeeded.
+//                        for sound in sounds!{
+//
+//                            let identifier = sound.objectId! as String!
+//                            if self.oldAnnotationDict[identifier] != nil {
+//                                self.newAnnotationDict[identifier] = self.oldAnnotationDict[identifier]
+//                            } else {
+//                                //Make annotation.
+//                                let titleString = sound["title"]! as! String
+//                                let loc = sound["location"]! as! PFGeoPoint
+//                                let soundAnnotation = Sound(title: titleString,
+//                                    locationName: "some location",
+//                                    discipline: "public",
+//                                    coordinate: CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude))
+//                                self.newAnnotationDict[identifier] = soundAnnotation
+//                                self.mapView.addAnnotation(soundAnnotation)
+//                            }
+//                        }
+//                        for (identifier, soundAnnotation) in self.oldAnnotationDict {
+//                            if (self.newAnnotationDict[identifier] == nil) {
+//                                self.mapView.removeAnnotation(soundAnnotation as MKAnnotation)
+//                            }
+//                        }
+//                        self.oldAnnotationDict = self.newAnnotationDict
+//                        self.newAnnotationDict = [:]
+//                    } else {
+//                        // Log details of the failure
+//                        println("Error: \(error!) \(error!.userInfo!)")
+//                    }
+//                }
+//            }
     
     func getClosestSound() {
-        //println("finding closest sound")
         PFGeoPoint.geoPointForCurrentLocationInBackground {
             (userGeoPoint: PFGeoPoint?, error: NSError?) -> Void in
             if error == nil {
@@ -109,38 +159,73 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
                 soundQuery.getFirstObjectInBackgroundWithBlock {
                     (sound: PFObject?, error: NSError?) -> Void in
                     if error != nil || sound == nil {
-                        println("The getClosestSound request failed.")
                     } else {
-                        
+
                         let audioFile: PFFile = sound!["file"] as! PFFile
                         let loc = sound!["location"] as! PFGeoPoint
-                        
+
                         //want to check if sound!["location"] is close enough to userlocation
 
                         if (userGeoPoint!.distanceInKilometersTo(loc) < 0.02) { //this is 20 meters
-                            println("less than 10m away")
                             audioFile.getDataInBackgroundWithBlock({
                                 (soundData: NSData?, error: NSError?) -> Void in
                                 if (error == nil) {
-                                    
+
                                     dispatch_async(dispatch_get_main_queue()) {
                                         self.player = AVAudioPlayer(data: soundData!, error: nil)
                                         self.player.delegate = self
                                         self.player.play()
                                     }
-                                    
+
                                 } else {
                                     println("error")
                                 }
                             })
-                        
                         }
-                        
                     }
                 }
             }
         }
     }
+    
+//        PFGeoPoint.geoPointForCurrentLocationInBackground {
+//            (userGeoPoint: PFGeoPoint?, error: NSError?) -> Void in
+//            if error == nil {
+//                var soundQuery = PFQuery(className:"Sounds")
+//                soundQuery.whereKey("location", nearGeoPoint:userGeoPoint!)
+//                soundQuery.limit = 1
+//                soundQuery.getFirstObjectInBackgroundWithBlock {
+//                    (sound: PFObject?, error: NSError?) -> Void in
+//                    if error != nil || sound == nil {
+//                    } else {
+//                        
+//                        let audioFile: PFFile = sound!["file"] as! PFFile
+//                        let loc = sound!["location"] as! PFGeoPoint
+//                        
+//                        //want to check if sound!["location"] is close enough to userlocation
+//
+//                        if (userGeoPoint!.distanceInKilometersTo(loc) < 0.02) { //this is 20 meters
+//                            audioFile.getDataInBackgroundWithBlock({
+//                                (soundData: NSData?, error: NSError?) -> Void in
+//                                if (error == nil) {
+//                                    
+//                                    dispatch_async(dispatch_get_main_queue()) {
+//                                        self.player = AVAudioPlayer(data: soundData!, error: nil)
+//                                        self.player.delegate = self
+//                                        self.player.play()
+//                                    }
+//                                    
+//                                } else {
+//                                    println("error")
+//                                }
+//                            })
+//                        
+//                        }
+//                        
+//                    }
+//                }
+//            }
+//        }
 
     
     func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
