@@ -147,42 +147,42 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
 //            }
     
     func getClosestSound() {
-        PFGeoPoint.geoPointForCurrentLocationInBackground {
-            (userGeoPoint: PFGeoPoint?, error: NSError?) -> Void in
-            if error == nil {
-                var soundQuery = PFQuery(className:"Sounds")
-                soundQuery.whereKey("location", nearGeoPoint:userGeoPoint!)
-                soundQuery.limit = 1
-                soundQuery.getFirstObjectInBackgroundWithBlock {
-                    (sound: PFObject?, error: NSError?) -> Void in
-                    if error != nil || sound == nil {
-                    } else {
-
-                        let audioFile: PFFile = sound!["file"] as! PFFile
-                        let loc = sound!["location"] as! PFGeoPoint
-
-                        //want to check if sound!["location"] is close enough to userlocation
-
-                        if (userGeoPoint!.distanceInKilometersTo(loc) < 0.02) { //this is 20 meters
-                            audioFile.getDataInBackgroundWithBlock({
-                                (soundData: NSData?, error: NSError?) -> Void in
-                                if (error == nil) {
-
-                                    dispatch_async(dispatch_get_main_queue()) {
-                                        self.player = AVAudioPlayer(data: soundData!, error: nil)
-                                        self.player.delegate = self
-                                        self.player.play()
-                                    }
-
-                                } else {
-                                    println("error")
-                                }
-                            })
-                        }
-                    }
-                }
-            }
-        }
+//        PFGeoPoint.geoPointForCurrentLocationInBackground {
+//            (userGeoPoint: PFGeoPoint?, error: NSError?) -> Void in
+//            if error == nil {
+//                var soundQuery = PFQuery(className:"Sounds")
+//                soundQuery.whereKey("location", nearGeoPoint:userGeoPoint!)
+//                soundQuery.limit = 1
+//                soundQuery.getFirstObjectInBackgroundWithBlock {
+//                    (sound: PFObject?, error: NSError?) -> Void in
+//                    if error != nil || sound == nil {
+//                    } else {
+//
+//                        let audioFile: PFFile = sound!["file"] as! PFFile
+//                        let loc = sound!["location"] as! PFGeoPoint
+//
+//                        //want to check if sound!["location"] is close enough to userlocation
+//
+//                        if (userGeoPoint!.distanceInKilometersTo(loc) < 0.02) { //this is 20 meters
+//                            audioFile.getDataInBackgroundWithBlock({
+//                                (soundData: NSData?, error: NSError?) -> Void in
+//                                if (error == nil) {
+//
+//                                    dispatch_async(dispatch_get_main_queue()) {
+//                                        self.player = AVAudioPlayer(data: soundData!, error: nil)
+//                                        self.player.delegate = self
+//                                        self.player.play()
+//                                    }
+//
+//                                } else {
+//                                    println("error")
+//                                }
+//                            })
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
     
 //        PFGeoPoint.geoPointForCurrentLocationInBackground {
