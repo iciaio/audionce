@@ -97,13 +97,23 @@ class signupVC: UIViewController {
                         if (success) {
                             var soundList: [PFObject] = []
                             var sharedSounds: [PFObject] = []
-                            
-                            user["sounds"] = soundList
-                            user["friends"] = friendTable
-                            user["observable_sounds"] = sharedSounds
-                            user.saveInBackground()
-                            
-                            self.performSegueWithIdentifier("to_main_from_signup", sender: self)
+                            var pointerToSharedSoundsObject = PFObject(className: "SharedSounds")
+                            pointerToSharedSoundsObject["user"] = PFUser.currentUser()
+                            pointerToSharedSoundsObject["sounds"] = []
+                            pointerToSharedSoundsObject.saveInBackgroundWithBlock {
+                                (success: Bool, error: NSError?) -> Void in
+                                if (success) {
+                                    user["sounds"] = soundList
+                                    user["friends"] = friendTable
+                                    user["observable_sounds"] = sharedSounds
+                                    user["shared_sounds"] = pointerToSharedSoundsObject
+                                    user.saveInBackground()
+                                    
+                                    self.performSegueWithIdentifier("to_main_from_signup", sender: self)
+                                } else {
+                                    println("failed to create pointer to shared sounds")
+                                }
+                            }
                         } else {
                             println("signup failed!")
                         }

@@ -71,7 +71,7 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
 
                         // The find succeeded.
                         for sound in sounds!{
-                            if sound["is_private"] as! Bool == false {
+                            if (sound["is_private"] as! Bool == false) || (contains(sound["to"] as! [PFUser], PFUser.currentUser()!)) { //if the sound is public or private and the user can see it
                                 let identifier = sound.objectId! as String!
                                 if self.oldAnnotationDict[identifier] != nil {
                                     self.newAnnotationDict[identifier] = self.oldAnnotationDict[identifier]

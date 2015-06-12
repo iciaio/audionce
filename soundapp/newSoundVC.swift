@@ -165,8 +165,6 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     @IBAction func submitAudio(sender: AnyObject) {
         var error: NSError?
         
-        println("submitting")
-        
         if (self.titleTextField.text == ""){
             var alertView:UIAlertView = UIAlertView()
             alertView.title = "No title"
@@ -175,11 +173,8 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
             alertView.addButtonWithTitle("OK")
             alertView.show()
         } else {
-            
-            //get users from shareWith array
-            //query SharedSounds for that user, put sound in ["sounds"]
             self.getUsersFromNameArray()
-            println("done with getUsersFromNameArray")
+            println(self.shareWithUsers)
             let fileData = NSData(contentsOfURL: soundFileURL)
             let parseFile = PFFile(name: "sound.aac", data: fileData!)
             parseFile.saveInBackgroundWithBlock {
@@ -205,6 +200,7 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
                                 if (success) {
                                     println("sucess saving new sound!")
                                     self.addToUserSoundArray(newSound) //adds to current user sounds
+                                    self.addToUserObservableSounds(newSound) //adds to to all users in ["to"] observable sounds if private, else does nothing lol
                                     self.performSegueWithIdentifier("to_main_from_submit", sender: self)
                                 } else {
                                     println("error saving sound \(error)")
@@ -234,13 +230,35 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
                 (user: AnyObject?, error: NSError?) -> Void in
                 if (error == nil) {
                     self.shareWithUsers.append(user as! PFUser)
-                    println(self.shareWithUsers)
                 }
                 else{
                     println("error querying for friend to share sounds with")
                     println(error)
                 }
             }
+        }
+    }
+    
+    func addToUserObservableSounds(soundObject : PFObject){
+        let currentUser = PFUser.currentUser()!
+        if (soundObject["is_private"] as! Bool == true) { //PRIVATE SOUND
+            println("adding to shared users observable sounds")
+            for shareWithThisFriend in soundObject["to"] as! [PFUser]{
+                let sharedSound = shareWithThisFriend["shared_sounds"] as! PFObject
+                sharedSound.fetchIfNeededInBackgroundWithBlock({
+                    (object, error) -> Void in
+                    if (error == nil){
+                        var soundArray = sharedSound["sounds"] as! [PFObject]
+                        soundArray.append(soundObject)
+                        sharedSound["sounds"] = soundArray
+                        sharedSound.saveInBackground()
+                    } else {
+                        println("Error getting shared sounds array: \(error)")
+                    }
+                })
+            }
+        } else { //PUBLIC SOUND
+            println("public")
         }
     }
     

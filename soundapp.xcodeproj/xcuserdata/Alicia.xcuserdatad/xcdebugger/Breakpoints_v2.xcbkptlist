@@ -68,47 +68,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "soundapp/signupVC.swift"
-            timestampString = "455748290.950182"
+            timestampString = "455834075.695829"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "signupPressed(_:)"
             landmarkType = "5">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "function signature specialization &lt;Arg[4] = Dead, Arg[5] = Value Promoted from InOut&gt; of soundapp.signupVC.(signupPressed (soundapp.signupVC) -&gt; (Swift.AnyObject) -&gt; ()).(closure #1).(closure #1)"
+                  symbolName = "soundapp.signupVC.(signupPressed (soundapp.signupVC) -&gt; (Swift.AnyObject) -&gt; ()).(closure #1).(closure #1)"
                   moduleName = "soundapp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Alicia/Desktop/soundapp-master/soundapp/signupVC.swift"
-                  timestampString = "455777482.647996"
+                  timestampString = "455833970.950898"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "107"
-                  endingLineNumber = "107"
-                  offsetFromSymbolStart = "1064">
+                  startingLineNumber = "116"
+                  endingLineNumber = "116"
+                  offsetFromSymbolStart = "860">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "function signature specialization &lt;Arg[4] = Dead, Arg[5] = Value Promoted from InOut&gt; of soundapp.signupVC.(signupPressed (soundapp.signupVC) -&gt; (Swift.AnyObject) -&gt; ()).(closure #1).(closure #1)"
+                  symbolName = "soundapp.signupVC.(signupPressed (soundapp.signupVC) -&gt; (Swift.AnyObject) -&gt; ()).(closure #1).(closure #1)"
                   moduleName = "soundapp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Alicia/Desktop/soundapp-master/soundapp/signupVC.swift"
-                  timestampString = "455777482.648322"
+                  timestampString = "455833970.951141"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "107"
-                  endingLineNumber = "107"
-                  offsetFromSymbolStart = "1088">
+                  startingLineNumber = "116"
+                  endingLineNumber = "116"
+                  offsetFromSymbolStart = "884">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -120,11 +120,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "soundapp/newSoundVC.swift"
-            timestampString = "455774787.182192"
+            timestampString = "455832377.996275"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
             landmarkName = "submitAudio(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -136,11 +136,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "soundapp/newSoundVC.swift"
-            timestampString = "455774850.361375"
+            timestampString = "455832377.996275"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "submitAudio(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -152,11 +152,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "soundapp/newSoundVC.swift"
-            timestampString = "455774855.387497"
+            timestampString = "455832377.996275"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
             landmarkName = "submitAudio(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -168,11 +168,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "soundapp/newSoundVC.swift"
-            timestampString = "455774857.225508"
+            timestampString = "455832377.996275"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
             landmarkName = "submitAudio(_:)"
             landmarkType = "5">
             <Locations>
@@ -216,12 +216,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "soundapp/newSoundVC.swift"
-            timestampString = "455774858.332409"
+            timestampString = "455832377.996275"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
             landmarkName = "submitAudio(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "soundapp/newSoundVC.swift"
+            timestampString = "455837081.555996"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
+            landmarkName = "addToUserObservableSounds(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
