@@ -61,13 +61,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vYH-QJ-nlQ">
-                                <rect key="frame" x="31" y="163" width="247" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0bK-pw-g0i">
-                                <rect key="frame" x="4" y="201" width="312" height="29"/>
+                                <rect key="frame" x="4" y="197" width="312" height="29"/>
                                 <segments>
                                     <segment title="Private"/>
                                     <segment title="Public"/>
@@ -78,7 +73,7 @@
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSc-x5-G6I">
-                                <rect key="frame" x="80" y="100" width="55" height="55"/>
+                                <rect key="frame" x="80" y="83" width="55" height="55"/>
                                 <state key="normal" image="recording.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -87,7 +82,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cuh-YA-ZUK">
-                                <rect key="frame" x="185" y="100" width="55" height="55"/>
+                                <rect key="frame" x="185" y="83" width="55" height="55"/>
                                 <state key="normal" image="playaudio.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -116,12 +111,20 @@
                                     <segue destination="GbG-hf-GHR" kind="embed" id="xbM-43-e3G"/>
                                 </connections>
                             </containerView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vYH-QJ-nlQ">
+                                <rect key="frame" x="4" y="155" width="312" height="30"/>
+                                <color key="backgroundColor" red="0.72941176470000002" green="0.68627450980000004" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="sIA-nm-YbF"/>
                     <connections>
+                        <outlet property="containerForCollection" destination="Mwu-iz-i4J" id="SaN-hO-EsS"/>
                         <outlet property="playPauseButton" destination="Cuh-YA-ZUK" id="r6B-U9-Up8"/>
                         <outlet property="privacyToggle" destination="0bK-pw-g0i" id="Fpc-uo-wPt"/>
                         <outlet property="recordStopButton" destination="dSc-x5-G6I" id="tUm-zf-HRK"/>

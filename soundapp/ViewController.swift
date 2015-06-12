@@ -119,6 +119,7 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
                                     self.player = AVAudioPlayer(data: soundData!, error: nil)
                                     self.player.delegate = self
                                     self.player.play()
+                                    self.geoSounds.removeAtIndex(find(self.geoSounds,sound)!)
                                     return
                                     
                                 }

@@ -18,7 +18,9 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var privacyToggle: UISegmentedControl!
+    @IBOutlet weak var containerForCollection: UIView!
     
+    var blurView : UIView!
     var player: AVAudioPlayer!
     var recorder: AVAudioRecorder!
     var soundFileURL = NSURL()
@@ -29,7 +31,7 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateUserArray:",name:"userArrayUpdate", object: nil)
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 22))
@@ -49,8 +51,15 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
         println("toggled")
         if (self.privacyToggle.selectedSegmentIndex == 0){
             print("private sound")
+            self.blurView.removeFromSuperview()
+
         } else {
-            print("public sound")
+            
+            var darkBlur = UIBlurEffect(style: UIBlurEffectStyle.Light)
+            blurView = UIVisualEffectView(effect: darkBlur)
+            blurView.frame = CGRectMake(0, 226, UIScreen.mainScreen().bounds.width, 250)
+            view.addSubview(self.blurView)
+
         }
     }
     
