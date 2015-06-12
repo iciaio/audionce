@@ -18,6 +18,13 @@ class friendListVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        super.viewDidLoad()
+        
+        var refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: Selector("setFriends"), forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl = refreshControl
+        
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 110, height: 22))
         imageView.contentMode = .ScaleAspectFit
         let image = UIImage(named: "friendsnav.png")
@@ -38,6 +45,7 @@ class friendListVC: UITableViewController {
                     println(self.friendArray.count)
                     
                     self.tableView.reloadData()
+                    self.refreshControl?.endRefreshing()
                 }
             })
         }

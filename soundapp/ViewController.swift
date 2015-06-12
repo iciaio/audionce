@@ -56,7 +56,6 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
     func queryForAnnotations() {
         //in this function we want the annotations from 
         //user["observeable_sounds"]  <--private sounds from others
-        //and from user["sounds"] <--sounds i have posted
         //and from sounds["is_private"] == false <-- sounds that are public
         //if cloud code does this
         PFGeoPoint.geoPointForCurrentLocationInBackground {
@@ -86,8 +85,6 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
                                         coordinate: CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude))
                                     self.newAnnotationDict[identifier] = soundAnnotation
                                     self.mapView.addAnnotation(soundAnnotation)
-                                } else {
-                                    let
                                 }
                             } else {
                                 let soundTitle = sound["title"]

@@ -63,6 +63,10 @@ class addFriendVC: UITableViewController, UISearchBarDelegate, UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: Selector("loadList:"), forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl = refreshControl
+        
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 110, height: 22))
         imageView.contentMode = .ScaleAspectFit
         let image = UIImage(named: "addfriendsnav.png")
@@ -157,6 +161,7 @@ class addFriendVC: UITableViewController, UISearchBarDelegate, UITableViewDataSo
                     }
                 }
                 self.tableView.reloadData()
+                self.refreshControl?.endRefreshing()
             }
             else{
                 println(error)
