@@ -199,8 +199,8 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
                                 (success: Bool, error: NSError?) -> Void in
                                 if (success) {
                                     println("sucess saving new sound!")
-                                    self.addToUserSoundArray(newSound) //adds to current user sounds
-                                    self.addToUserObservableSounds(newSound) //adds to to all users in ["to"] observable sounds if private, else does nothing lol
+                                    self.addToUserSoundArray(newSound) //adds to current user sounds CLOUD SHOULD DO THIS
+                                    self.addToUserObservableSounds(newSound) //adds to to all users in ["to"] observable sounds if private, else does nothing CLOUD SHOULD ALSO DO THIS
                                     self.performSegueWithIdentifier("to_main_from_submit", sender: self)
                                 } else {
                                     println("error saving sound \(error)")
@@ -237,6 +237,7 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
                 }
             }
         }
+        self.shareWithUsers.append(PFUser.currentUser()!)
     }
     
     func addToUserObservableSounds(soundObject : PFObject){

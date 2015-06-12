@@ -20,6 +20,7 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
     var oldAnnotationDict = Dictionary<String, MKAnnotation>()
     var newAnnotationDict = Dictionary<String, MKAnnotation>()
     var player : AVAudioPlayer!
+    var geoSounds : [PFObject] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,7 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
             imageView.image = image
             navigationItem.titleView = imageView
             
-            var timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: Selector("clearAndRepopulateAnnotations"), userInfo: nil, repeats: true)
+            var timer = NSTimer.scheduledTimerWithTimeInterval(60.0, target: self, selector: Selector("clearAndRepopulateAnnotations"), userInfo: nil, repeats: true)
             locationManager = CLLocationManager()
             locationManager.desiredAccuracy = kCLLocationAccuracyBest;
             locationManager.requestAlwaysAuthorization()
@@ -45,7 +46,6 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
             println(locationManager.location)
             mapView.setRegion(MKCoordinateRegionMakeWithDistance(locValue, 400, 400), animated: true)
             queryForAnnotations()
-            getClosestSound()
         }
     }
     
@@ -54,10 +54,7 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
     }
     
     func queryForAnnotations() {
-        //in this function we want the annotations from 
-        //user["observeable_sounds"]  <--private sounds from others
-        //and from sounds["is_private"] == false <-- sounds that are public
-        //if cloud code does this
+        self.geoSounds = []
         PFGeoPoint.geoPointForCurrentLocationInBackground {
             (userGeoPoint: PFGeoPoint?, error: NSError?) -> Void in
             if error == nil {
@@ -86,9 +83,7 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
                                     self.newAnnotationDict[identifier] = soundAnnotation
                                     self.mapView.addAnnotation(soundAnnotation)
                                 }
-                            } else {
-                                let soundTitle = sound["title"]
-                                println("private sound \(soundTitle)")
+                                self.geoSounds.append(sound as! PFObject)
                             }
                         }
                         for (identifier, soundAnnotation) in self.oldAnnotationDict {
@@ -106,6 +101,62 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
             }
         }
     }
+    
+    func playClosestSound(){
+        println("playing closest sound")
+        PFGeoPoint.geoPointForCurrentLocationInBackground {
+            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
+            if error == nil {
+                for sound in self.geoSounds{
+                    let loc = sound["location"] as! PFGeoPoint
+                    let audioFile: PFFile = sound["file"] as! PFFile
+                    if (loc.distanceInKilometersTo(geoPoint) < 0.02){
+                        audioFile.getDataInBackgroundWithBlock({
+                            (soundData: NSData?, error: NSError?) -> Void in
+                            if (error == nil) {
+
+                                dispatch_async(dispatch_get_main_queue()) {
+                                    self.player = AVAudioPlayer(data: soundData!, error: nil)
+                                    self.player.delegate = self
+                                    self.player.play()
+                                    return
+                                    
+                                }
+
+                            } else {
+                                println("error")
+                            }
+                        })
+                    }
+                }
+            }
+        }
+    }
+
+    func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
+        currentLocation = CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude)
+        println("updating location")
+        if (self.player == nil){
+            playClosestSound()
+        } else { //if player is not nil, a sound is playing so do not update location
+            self.locationManager.stopUpdatingLocation()
+        }
+    }
+    
+    func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
+        self.player = nil
+        self.locationManager.startUpdatingLocation()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+}
+
+
+
 //
 //                var soundQuery = PFQuery(className:"Sounds")
 //                soundQuery.whereKey("location", nearGeoPoint:userGeoPoint!)
@@ -146,7 +197,7 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
 //                }
 //            }
     
-    func getClosestSound() {
+//    func getClosestSound() {
 //        PFGeoPoint.geoPointForCurrentLocationInBackground {
 //            (userGeoPoint: PFGeoPoint?, error: NSError?) -> Void in
 //            if error == nil {
@@ -183,7 +234,7 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
 //                }
 //            }
 //        }
-    }
+//    }
     
 //        PFGeoPoint.geoPointForCurrentLocationInBackground {
 //            (userGeoPoint: PFGeoPoint?, error: NSError?) -> Void in
@@ -225,27 +276,5 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
 //        }
 
     
-    func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
 
-        currentLocation = CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude)
-        if (self.player == nil){
-            getClosestSound()
-        } else { //if player is not nil, a sound is playing so do not update location
-            self.locationManager.stopUpdatingLocation()
-        }
-        //play closest sound if within min distance to closest coord
-        //if
-    }
-    
-    func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
-        self.player = AVAudioPlayer()
-        self.locationManager.startUpdatingLocation()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-}
 
