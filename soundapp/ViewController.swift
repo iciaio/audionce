@@ -68,7 +68,24 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
 
                         // The find succeeded.
                         for sound in sounds!{
-                            if (sound["is_private"] as! Bool == false) || (contains(sound["to"] as! [PFUser], PFUser.currentUser()!)) { //if the sound is public or private and the user can see it
+                            if (sound["is_private"] as! Bool == false){ //if the sound is public or private and the user can see it
+                                let identifier = sound.objectId! as String!
+                                if self.oldAnnotationDict[identifier] != nil {
+                                    self.newAnnotationDict[identifier] = self.oldAnnotationDict[identifier]
+                                } else {
+                                    //Make annotation.
+                                    let titleString = sound["title"]! as! String
+                                    let loc = sound["location"]! as! PFGeoPoint
+                                    let soundAnnotation = Sound(title: titleString,
+                                        locationName: "some location",
+                                        discipline: "public",
+                                        coordinate: CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude))
+                                    self.newAnnotationDict[identifier] = soundAnnotation
+                                    self.mapView.addAnnotation(soundAnnotation)
+                                }
+                                self.geoSounds.append(sound as! PFObject)
+                            }
+                            if (sound["is_private"] as! Bool == true) && (contains(sound["to"] as! [PFUser], PFUser.currentUser()!)){
                                 let identifier = sound.objectId! as String!
                                 if self.oldAnnotationDict[identifier] != nil {
                                     self.newAnnotationDict[identifier] = self.oldAnnotationDict[identifier]

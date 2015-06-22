@@ -183,7 +183,7 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
             alertView.show()
         } else {
             self.getUsersFromNameArray()
-            println(self.shareWithUsers)
+            println("here")
             let fileData = NSData(contentsOfURL: soundFileURL)
             let parseFile = PFFile(name: "sound.aac", data: fileData!)
             parseFile.saveInBackgroundWithBlock {
@@ -196,7 +196,6 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
                             newSound["file"] = parseFile
                             newSound["title"] = self.titleTextField.text
                             newSound["location"] = geoPoint
-                            newSound["user"] = PFUser.currentUser()
                             if (self.privacyToggle.selectedSegmentIndex == 0){
                                 newSound["is_private"] = true
                                 newSound["to"] = self.shareWithUsers
@@ -204,6 +203,7 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
                             else{
                                 newSound["is_private"] = false
                             }
+                            newSound["user"] = PFUser.currentUser()
                             newSound.saveInBackgroundWithBlock {
                                 (success: Bool, error: NSError?) -> Void in
                                 if (success) {
@@ -212,7 +212,7 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
                                     self.addToUserObservableSounds(newSound) //adds to to all users in ["to"] observable sounds if private, else does nothing CLOUD SHOULD ALSO DO THIS
                                     self.performSegueWithIdentifier("to_main_from_submit", sender: self)
                                 } else {
-                                    println("error saving sound \(error)")
+                                    println("error saving sound... \(error)")
                                 }
                             }
                         }

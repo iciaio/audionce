@@ -23,15 +23,16 @@ class userSoundsTableVC: UITableViewController {
     
     func setSounds(){
         self.soundArray = []
-        var sounds = self.currentUser!["sounds"] as! [PFObject]
-        for sound in sounds {
-            sound.fetchIfNeededInBackgroundWithBlock({
-                (object, error) -> Void in
-                if (error == nil){
-                    self.soundArray.append(sound)
-                    self.tableView.reloadData()
-                }
-            })
+        if let sounds = self.currentUser!["sounds"] as? [PFObject]{
+            for sound in sounds {
+                sound.fetchIfNeededInBackgroundWithBlock({
+                    (object, error) -> Void in
+                    if (error == nil){
+                        self.soundArray.append(sound)
+                        self.tableView.reloadData()
+                    }
+                })
+            }
         }
     }
     
@@ -68,6 +69,26 @@ class userSoundsTableVC: UITableViewController {
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             
             currentUser!["sounds"] = soundArray
+            
+            if let toUsers = soundObject["to"] as? [PFUser]{
+                for user in toUsers{
+                    var sharedSoundsQuery = PFQuery(className:"SharedSounds")
+                    sharedSoundsQuery.whereKey("user", equalTo: user)
+                    sharedSoundsQuery.getFirstObjectInBackgroundWithBlock{
+                        (sharedSound: AnyObject?, error: NSError?) -> Void in
+                        if (error == nil) {
+                            if let sharedSound = sharedSound as? PFObject{
+                                sharedSound["sounds"]! = []
+                            }
+                        }
+                        else{
+                            println("error removing sound from shared sounds")
+                        }
+                    }
+
+                }
+            }
+            
             soundObject.deleteInBackground()
             currentUser?.saveInBackground()
 
