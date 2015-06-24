@@ -16,6 +16,14 @@ class profileVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     @IBOutlet weak var editNameOutlet: UIButton!
     @IBOutlet weak var editPicOutlet: UIButton!
     
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> Int {
+        return UIInterfaceOrientation.Portrait.rawValue
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

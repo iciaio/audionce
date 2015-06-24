@@ -29,6 +29,14 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     var shareWith: [String] = []
     var shareWithUsers: [PFUser] = []
     
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> Int {
+        return UIInterfaceOrientation.Portrait.rawValue
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

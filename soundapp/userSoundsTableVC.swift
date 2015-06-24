@@ -70,24 +70,34 @@ class userSoundsTableVC: UITableViewController {
             
             currentUser!["sounds"] = soundArray
             
-            if let toUsers = soundObject["to"] as? [PFUser]{
-                for user in toUsers{
-                    var sharedSoundsQuery = PFQuery(className:"SharedSounds")
-                    sharedSoundsQuery.whereKey("user", equalTo: user)
-                    sharedSoundsQuery.getFirstObjectInBackgroundWithBlock{
-                        (sharedSound: AnyObject?, error: NSError?) -> Void in
-                        if (error == nil) {
-                            if let sharedSound = sharedSound as? PFObject{
-                                sharedSound["sounds"]! = []
-                            }
-                        }
-                        else{
-                            println("error removing sound from shared sounds")
-                        }
-                    }
-
-                }
-            }
+//            if ((soundObject["is_private"] as! Bool) == true) {
+//                if let toUsers = soundObject["to"] as? [PFUser]{
+//                    for user in toUsers{
+//                        user.fetchIfNeededInBackgroundWithBlock({
+//                            (object, error) -> Void in
+//                            if (error == nil){
+//                                var sharedSoundsQuery = PFQuery(className:"SharedSounds")
+//                                sharedSoundsQuery.whereKey("user", equalTo: user)
+//                                sharedSoundsQuery.getFirstObjectInBackgroundWithBlock{
+//                                    (sharedSound: AnyObject?, error: NSError?) -> Void in
+//                                    if !(error != nil) {
+//                                        if let sharedSound = sharedSound as? PFObject!{
+//                                            if let soundArray = sharedSound["sounds"] as? [PFObject]!{
+//                                                let index = find(soundArray, soundObject)
+//                                                soundArray.removeAtIndex(index)
+//                                            }
+//                                        }
+//                                    }
+//                                    else{
+//                                        println("error getting shared sounds for deletion\(error)")
+//                                    }
+//                                }
+//
+//                            }
+//                        })
+//                    }
+//                }
+//            }
             
             soundObject.deleteInBackground()
             currentUser?.saveInBackground()

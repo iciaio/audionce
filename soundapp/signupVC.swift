@@ -15,6 +15,14 @@ class signupVC: UIViewController {
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtConfirmPassword: UITextField!
     
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> Int {
+        return UIInterfaceOrientation.Portrait.rawValue
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red:199.0/255.0, green:190.0/255.0, blue:216.0/255.0, alpha:1.0)
@@ -67,7 +75,7 @@ class signupVC: UIViewController {
             user.username = username
             user.password = password
             
-            let image = UIImage(named: "me.jpg")
+            let image = UIImage(named: "profdef.png")
             let imageData = UIImagePNGRepresentation(image)
             let imageFile = PFFile(data:imageData)
             

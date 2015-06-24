@@ -43,7 +43,6 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
             mapView.delegate = self
             locationManager.startUpdatingLocation()
             var locValue:CLLocationCoordinate2D = locationManager.location.coordinate
-            println(locationManager.location)
             mapView.setRegion(MKCoordinateRegionMakeWithDistance(locValue, 400, 400), animated: true)
             queryForAnnotations()
         }
