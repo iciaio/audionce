@@ -40,11 +40,15 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
             locationManager.requestAlwaysAuthorization()
             locationManager.distanceFilter = 1.0;
             mapView.showsUserLocation = true
-            mapView.delegate = self
-            locationManager.startUpdatingLocation()
-            var locValue:CLLocationCoordinate2D = locationManager.location.coordinate
-            mapView.setRegion(MKCoordinateRegionMakeWithDistance(locValue, 400, 400), animated: true)
-            queryForAnnotations()
+            if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.NotDetermined) {
+                locationManager.requestAlwaysAuthorization()
+            } else {
+                mapView.delegate = self
+                locationManager.startUpdatingLocation()
+                var locValue:CLLocationCoordinate2D = locationManager.location.coordinate
+                mapView.setRegion(MKCoordinateRegionMakeWithDistance(locValue, 400, 400), animated: true)
+                queryForAnnotations()
+            }
         }
     }
     
@@ -137,7 +141,6 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
                                     self.player.play()
                                     self.geoSounds.removeAtIndex(find(self.geoSounds,sound)!)
                                     return
-                                    
                                 }
 
                             } else {

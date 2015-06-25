@@ -16,14 +16,6 @@ class profileVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     @IBOutlet weak var editNameOutlet: UIButton!
     @IBOutlet weak var editPicOutlet: UIButton!
     
-    override func shouldAutorotate() -> Bool {
-        return false
-    }
-    
-    override func supportedInterfaceOrientations() -> Int {
-        return UIInterfaceOrientation.Portrait.rawValue
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,6 +41,14 @@ class profileVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         }
                 
         self.txtUsername.text = PFUser.currentUser()?.username
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> Int {
+        return Int(UIInterfaceOrientation.Portrait.rawValue)
     }
 
     override func didReceiveMemoryWarning() {

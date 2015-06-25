@@ -241,7 +241,7 @@
             <objects>
                 <tableViewController id="ukt-T4-mDt" customClass="userSoundsTableVC" customModule="soundapp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="csQ-0W-AEe">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="312"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -289,7 +289,7 @@
             <objects>
                 <collectionViewController id="GbG-hf-GHR" customClass="chooseFriendsVC" customModule="soundapp" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="r7m-1e-ul3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="273"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="G5c-YZ-rVt">
@@ -349,14 +349,17 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NLM-zK-dOl" id="ajG-i9-Gp4">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OnD-b8-HhL">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OnD-b8-HhL">
                                             <rect key="frame" x="82" y="21" width="157" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4ok-9J-KG2">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4ok-9J-KG2">
                                             <rect key="frame" x="18" y="6" width="43" height="43"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="43" id="hhP-QR-agI"/>
+                                            </constraints>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQ0-Yl-mtd">
                                             <rect key="frame" x="235" y="17" width="71" height="30"/>
@@ -371,7 +374,10 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="dQ0-Yl-mtd" secondAttribute="trailing" constant="9" id="4il-Rh-D8k"/>
-                                        <constraint firstItem="dQ0-Yl-mtd" firstAttribute="leading" secondItem="4ok-9J-KG2" secondAttribute="trailing" constant="171" id="gyH-jF-zSz"/>
+                                        <constraint firstItem="4ok-9J-KG2" firstAttribute="leading" secondItem="ajG-i9-Gp4" secondAttribute="leadingMargin" constant="3" id="B9X-VH-LEr"/>
+                                        <constraint firstItem="4ok-9J-KG2" firstAttribute="top" secondItem="ajG-i9-Gp4" secondAttribute="topMargin" constant="-2" id="GZa-K0-eNv"/>
+                                        <constraint firstItem="4ok-9J-KG2" firstAttribute="centerY" secondItem="ajG-i9-Gp4" secondAttribute="centerY" id="Ubr-CK-EOe"/>
+                                        <constraint firstItem="OnD-b8-HhL" firstAttribute="leading" secondItem="4ok-9J-KG2" secondAttribute="trailing" constant="21" id="sbP-Q5-nhy"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -819,9 +825,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="wpq-Dp-2c7"/>
         <segue reference="fCo-6W-zNn"/>
         <segue reference="B6k-PE-Ijn"/>
+        <segue reference="wpq-Dp-2c7"/>
         <segue reference="9vi-et-TO4"/>
     </inferredMetricsTieBreakers>
 </document>

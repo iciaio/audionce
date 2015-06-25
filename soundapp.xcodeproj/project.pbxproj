@@ -25,6 +25,7 @@
 		C0C8B1A91B26B799001487DF /* stoprecording.png in Resources */ = {isa = PBXBuildFile; fileRef = C0C8B1A81B26B799001487DF /* stoprecording.png */; };
 		C0C8B1AB1B26B7A3001487DF /* playaudio.png in Resources */ = {isa = PBXBuildFile; fileRef = C0C8B1AA1B26B7A3001487DF /* playaudio.png */; };
 		C0C8B1AD1B26B7AA001487DF /* pauseaudio.png in Resources */ = {isa = PBXBuildFile; fileRef = C0C8B1AC1B26B7AA001487DF /* pauseaudio.png */; };
+		C0C986471B3C7CB4001A2F91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0C986461B3C7CB4001A2F91 /* Main.storyboard */; };
 		C0CA36431B1926CF0094C498 /* requestedUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CA36421B1926CF0094C498 /* requestedUserCell.swift */; };
 		C0CB5D341B25624800DD8578 /* editpencil.png in Resources */ = {isa = PBXBuildFile; fileRef = C0CB5D331B25624800DD8578 /* editpencil.png */; };
 		C0CB93A01B0ADF010079C45B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CB939F1B0ADF010079C45B /* AppDelegate.swift */; };
@@ -51,7 +52,6 @@
 		C0CB93FE1B0AE0E30079C45B /* signupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CB93FA1B0AE0E30079C45B /* signupVC.swift */; };
 		C0CB94011B0AE0F60079C45B /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0CB93FF1B0AE0F60079C45B /* Bolts.framework */; };
 		C0CB94021B0AE0F60079C45B /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0CB94001B0AE0F60079C45B /* Parse.framework */; };
-		C0CB94041B0AE1CF0079C45B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0CB94031B0AE1CF0079C45B /* Main.storyboard */; };
 		C0CC9D511B20241F00C85A88 /* audioncesplashscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = C0CC9D501B20241F00C85A88 /* audioncesplashscreen.png */; };
 		C0CC9D601B20273A00C85A88 /* Icon-Small-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C0CC9D5E1B20273A00C85A88 /* Icon-Small-40@2x.png */; };
 		C0CC9D611B20273A00C85A88 /* Icon-Small-40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C0CC9D5F1B20273A00C85A88 /* Icon-Small-40@3x.png */; };
@@ -93,6 +93,7 @@
 		C0C8B1A81B26B799001487DF /* stoprecording.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stoprecording.png; sourceTree = "<group>"; };
 		C0C8B1AA1B26B7A3001487DF /* playaudio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playaudio.png; sourceTree = "<group>"; };
 		C0C8B1AC1B26B7AA001487DF /* pauseaudio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseaudio.png; sourceTree = "<group>"; };
+		C0C986461B3C7CB4001A2F91 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C0CA36421B1926CF0094C498 /* requestedUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = requestedUserCell.swift; sourceTree = "<group>"; };
 		C0CB5D331B25624800DD8578 /* editpencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editpencil.png; sourceTree = "<group>"; };
 		C0CB939A1B0ADF010079C45B /* soundapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = soundapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,7 +124,6 @@
 		C0CB93FA1B0AE0E30079C45B /* signupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = signupVC.swift; sourceTree = "<group>"; };
 		C0CB93FF1B0AE0F60079C45B /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = soundapp/Bolts.framework; sourceTree = "<group>"; };
 		C0CB94001B0AE0F60079C45B /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = soundapp/Parse.framework; sourceTree = "<group>"; };
-		C0CB94031B0AE1CF0079C45B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C0CC9D501B20241F00C85A88 /* audioncesplashscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = audioncesplashscreen.png; sourceTree = "<group>"; };
 		C0CC9D5E1B20273A00C85A88 /* Icon-Small-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-40@2x.png"; sourceTree = "<group>"; };
 		C0CC9D5F1B20273A00C85A88 /* Icon-Small-40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-40@3x.png"; sourceTree = "<group>"; };
@@ -254,8 +254,8 @@
 		C0CB939C1B0ADF010079C45B /* soundapp */ = {
 			isa = PBXGroup;
 			children = (
+				C0C986461B3C7CB4001A2F91 /* Main.storyboard */,
 				C0CC9D6A1B2027E900C85A88 /* images */,
-				C0CB94031B0AE1CF0079C45B /* Main.storyboard */,
 				C0CB939F1B0ADF010079C45B /* AppDelegate.swift */,
 				C0C2FBA81B1FD29400A609D5 /* Map */,
 				C0C4361F1B16B1CE0045CB63 /* Profile */,
@@ -370,6 +370,7 @@
 				TargetAttributes = {
 					C0CB93991B0ADF010079C45B = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 5V53Z3K684;
 					};
 					C0CB93B11B0ADF010079C45B = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -406,6 +407,7 @@
 				C0C7F1601B3A694E00B92058 /* profdef.png in Resources */,
 				C0CC9D601B20273A00C85A88 /* Icon-Small-40@2x.png in Resources */,
 				C0CC9D611B20273A00C85A88 /* Icon-Small-40@3x.png in Resources */,
+				C0C986471B3C7CB4001A2F91 /* Main.storyboard in Resources */,
 				C0CC9D681B20274D00C85A88 /* Icon-Small@2x.png in Resources */,
 				C0CC9D511B20241F00C85A88 /* audioncesplashscreen.png in Resources */,
 				C0C8B1AD1B26B7AA001487DF /* pauseaudio.png in Resources */,
@@ -414,7 +416,6 @@
 				C0C8B1AB1B26B7A3001487DF /* playaudio.png in Resources */,
 				C0C782BD1B25556700E8DE74 /* navprofile.png in Resources */,
 				C0C782C01B25573200E8DE74 /* addfriendsnav.png in Resources */,
-				C0CB94041B0AE1CF0079C45B /* Main.storyboard in Resources */,
 				C0CC9D671B20274D00C85A88 /* Icon-60@3x.png in Resources */,
 				C0C8B1A91B26B799001487DF /* stoprecording.png in Resources */,
 				C0C782BB1B2554F200E8DE74 /* navaddsound.png in Resources */,
@@ -576,6 +577,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Alicia/Documents/navigating/navigating,
@@ -585,6 +588,7 @@
 				INFOPLIST_FILE = soundapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -592,6 +596,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Alicia/Documents/navigating/navigating,
@@ -601,6 +607,7 @@
 				INFOPLIST_FILE = soundapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

@@ -82,6 +82,7 @@ class addFriendVC: UITableViewController, UISearchBarDelegate, UITableViewDataSo
     
     func loadList(notification: NSNotification){
         //load data here
+        self.search = false
         populatedPending()
     }
     
