@@ -46,6 +46,7 @@ class soundCell: UITableViewCell, AVAudioPlayerDelegate {
                                         dispatch_async(dispatch_get_main_queue()) {
                                             self.player = AVAudioPlayer(data: audioData, error: nil)
                                             self.player.delegate = self
+                                            self.player.volume = 2.0
                                             self.player.play()
                                         }
                                     }
