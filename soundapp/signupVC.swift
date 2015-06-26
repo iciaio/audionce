@@ -18,11 +18,7 @@ class signupVC: UIViewController {
     override func shouldAutorotate() -> Bool {
         return false
     }
-    
-    override func supportedInterfaceOrientations() -> Int {
-        return UIInterfaceOrientation.Portrait.rawValue
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red:199.0/255.0, green:190.0/255.0, blue:216.0/255.0, alpha:1.0)
@@ -40,11 +36,11 @@ class signupVC: UIViewController {
         var password = txtPassword.text
         var confirm_password = txtConfirmPassword.text
         
-        if (count(username) == 0 || count(password) == 0){
-        
+        if (count(username) < 6 || count(password) < 6){
+
             var alertView:UIAlertView = UIAlertView()
             alertView.title = "Sign up failed"
-            alertView.message = "Please enter a Username and Password"
+            alertView.message = "Usernames and passwords must be at least 6 characters long."
             alertView.delegate = self
             alertView.addButtonWithTitle("OK")
             alertView.show()
