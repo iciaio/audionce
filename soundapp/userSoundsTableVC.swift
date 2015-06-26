@@ -68,7 +68,7 @@ class userSoundsTableVC: UITableViewController {
             self.soundArray.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             
-            currentUser!["sounds"] = soundArray
+//            currentUser!["sounds"] = soundArray
             
 //            if ((soundObject["is_private"] as! Bool) == true) {
 //                if let toUsers = soundObject["to"] as? [PFUser]{
