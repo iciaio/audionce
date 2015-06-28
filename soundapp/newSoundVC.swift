@@ -28,7 +28,7 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     var meterTimer:NSTimer!
     var shareWith: [String] = []
     var shareWithUsers: [PFUser] = []
-
+    
     override func shouldAutorotate() -> Bool {
         return false
     }
@@ -39,7 +39,6 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateUserArray:",name:"userArrayUpdate", object: nil)
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 22))
@@ -106,6 +105,7 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
         }
         
         if recorder == nil { //BEGIN RECORDING
+            
             submitButton.enabled = false
             var stop = UIImage(named: "stoprecording.png") as UIImage!
             recordStopButton.setImage(stop, forState: UIControlState.Normal)
