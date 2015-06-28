@@ -28,7 +28,7 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     var meterTimer:NSTimer!
     var shareWith: [String] = []
     var shareWithUsers: [PFUser] = []
-    
+
     override func shouldAutorotate() -> Bool {
         return false
     }
@@ -56,9 +56,7 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     }
     
     @IBAction func publicPrivateToggle(sender: AnyObject) {
-        println("toggled")
         if (self.privacyToggle.selectedSegmentIndex == 0){
-            print("private sound")
             self.blurView.removeFromSuperview()
 
         } else {
@@ -74,27 +72,23 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     func updateUserArray(notification:NSNotification) {
         let userInfo:Dictionary<String,[String]!> = notification.userInfo as! Dictionary<String,[String]!>
         if let userArray = userInfo["userArray"]! {
-            println(userArray)
             self.shareWith = userArray
         }
     }
 
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         var locValue:CLLocationCoordinate2D = manager.location.coordinate
-        println("locations = \(locValue.latitude) \(locValue.longitude)")
     }
     
     func setSessionPlayback() {
         let session:AVAudioSession = AVAudioSession.sharedInstance()
         var error: NSError?
         if !session.setCategory(AVAudioSessionCategoryPlayback, error:&error) {
-            println("could not set session category")
             if let e = error {
                 println(e.localizedDescription)
             }
         }
         if !session.setActive(true, error: &error) {
-            println("could not make session active")
             if let e = error {
                 println(e.localizedDescription)
             }
@@ -112,7 +106,6 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
         }
         
         if recorder == nil { //BEGIN RECORDING
-            println("recording. recorder nil")
             submitButton.enabled = false
             var stop = UIImage(named: "stoprecording.png") as UIImage!
             recordStopButton.setImage(stop, forState: UIControlState.Normal)
@@ -123,7 +116,6 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
         }
         
         if recorder != nil && recorder.recording { //STOP RECORDING
-            println("stopping")
             recorder.stop()
             playPauseButton.enabled = true
             submitButton.enabled = false
@@ -133,9 +125,7 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
             let session:AVAudioSession = AVAudioSession.sharedInstance()
             var error: NSError?
             if !session.setActive(false, error: &error) {
-                println("could not make session inactive")
                 if let e = error {
-                    println(e.localizedDescription)
                     return
                 }
             }
@@ -146,16 +136,13 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     }
     
     @IBAction func playAudio(sender: AnyObject) {
-        println("playing")
         if player != nil && player.playing { //STOP PLAYBACK
-            println("pausing")
             var play = UIImage(named: "playaudio.png") as UIImage!
             playPauseButton.setImage(play, forState: UIControlState.Normal)
             //playPauseButton.setTitle("Play", forState: UIControlState.Normal)
             player.pause()
             
         } else { //PLAYBACK
-            println("playing")
             var pause = UIImage(named: "pauseaudio.png") as UIImage!
             playPauseButton.setImage(pause, forState: UIControlState.Normal)
             //playPauseButton.setTitle("Pause", forState: UIControlState.Normal)
@@ -191,7 +178,6 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
             alertView.show()
         } else {
             self.getUsersFromNameArray()
-            println("here")
             let fileData = NSData(contentsOfURL: soundFileURL)
             let parseFile = PFFile(name: "sound.aac", data: fileData!)
             parseFile.saveInBackgroundWithBlock {
@@ -220,7 +206,6 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
                                     self.addToUserObservableSounds(newSound) //adds to to all users in ["to"] observable sounds if private, else does nothing CLOUD SHOULD ALSO DO THIS
                                     self.performSegueWithIdentifier("to_main_from_submit", sender: self)
                                 } else {
-                                    println("error saving sound... \(error)")
                                 }
                             }
                         }
@@ -233,7 +218,6 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     }
 
     func addToUserSoundArray(soundObject : PFObject){
-        println("add to user sound array")
         let currentUser = PFUser.currentUser()
         currentUser!.addObject(soundObject, forKey: "sounds")
         currentUser!.saveInBackground()
@@ -248,10 +232,6 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
                 if (error == nil) {
                     self.shareWithUsers.append(user as! PFUser)
                 }
-                else{
-                    println("error querying for friend to share sounds with")
-                    println(error)
-                }
             }
         }
         self.shareWithUsers.append(PFUser.currentUser()!)
@@ -260,7 +240,6 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
     func addToUserObservableSounds(soundObject : PFObject){
         let currentUser = PFUser.currentUser()!
         if (soundObject["is_private"] as! Bool == true) { //PRIVATE SOUND
-            println("adding to shared users observable sounds")
             for shareWithThisFriend in soundObject["to"] as! [PFUser]{
                 let sharedSound = shareWithThisFriend["shared_sounds"] as! PFObject
                 sharedSound.fetchIfNeededInBackgroundWithBlock({
@@ -270,13 +249,9 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
                         soundArray.append(soundObject)
                         sharedSound["sounds"] = soundArray
                         sharedSound.saveInBackground()
-                    } else {
-                        println("Error getting shared sounds array: \(error)")
                     }
                 })
             }
-        } else { //PUBLIC SOUND
-            println("public")
         }
     }
     
@@ -400,13 +375,9 @@ class newSoundVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelega
 //                        selector:"updateAudioMeter:",
 //                        userInfo:nil,
 //                        repeats:true)
-//                    
-                } else {
-                    println("Permission to record not granted")
+//
                 }
             })
-        } else {
-            println("requestRecordPermission unrecognized")
         }
     }
     

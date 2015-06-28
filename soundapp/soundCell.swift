@@ -20,12 +20,10 @@ class soundCell: UITableViewCell, AVAudioPlayerDelegate {
     @IBAction func playPauseButton(sender: AnyObject) {
         
         if player != nil && player.playing { //STOP PLAYBACK
-            println("pausing")
             self.playPauseButton.setTitle("Play", forState: UIControlState.Normal)
             self.player.pause()
             
         } else { //PLAYBACK
-            println("playing")
             playPauseButton.setTitle("Pause", forState: UIControlState.Normal)
     
             if self.player == nil {
@@ -34,7 +32,6 @@ class soundCell: UITableViewCell, AVAudioPlayerDelegate {
                 query.getFirstObjectInBackgroundWithBlock{
                     (sound: PFObject?, error: NSError?) -> Void in
                     if error != nil || sound == nil {
-                        println("request user failed on getting friend to request")
                     } else {
                         // The find succeeded.
                         sound?.fetchIfNeededInBackgroundWithBlock({

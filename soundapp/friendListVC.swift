@@ -36,13 +36,14 @@ class friendListVC: UITableViewController {
     }
     
     func setFriends(){
+        println("refreshing friendslist")
         if let currentUserFriends = self.currentUser?["friends"] as? PFObject{
             var friends = currentUserFriends
-            friends.fetchIfNeededInBackgroundWithBlock({
+            friends.fetchInBackgroundWithBlock({
                 (object, error) -> Void in
                 if (error == nil){
                     self.friendArray = friends["all_friends"]! as! [PFUser]
-                    println(self.friendArray.count)
+                    println("count: \(self.friendArray.count)")
                     
                     self.tableView.reloadData()
                     self.refreshControl?.endRefreshing()
@@ -62,6 +63,7 @@ class friendListVC: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        println(friendArray.count)
         return friendArray.count
     }
 

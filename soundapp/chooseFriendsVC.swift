@@ -37,7 +37,6 @@ class chooseFriendsVC: UICollectionViewController {
                 (object, error) -> Void in
                 if (error == nil){
                     self.friendArray = friends["all_friends"]! as! [PFUser]
-                    println(self.friendArray.count)
                     
                     self.collectionView?.reloadData()
                 }

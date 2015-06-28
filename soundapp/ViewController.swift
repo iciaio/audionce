@@ -115,7 +115,6 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
                         self.newAnnotationDict = [:]
                     } else {
                         // Log details of the failure
-                        println("Error: \(error!) \(error!.userInfo!)")
                     }
                 }
             }
@@ -123,7 +122,7 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
     }
     
     func playClosestSound(){
-        println("playing closest sound")
+
         PFGeoPoint.geoPointForCurrentLocationInBackground {
             (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
             if error == nil {
@@ -144,7 +143,7 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
                                 }
 
                             } else {
-                                println("error")
+
                             }
                         })
                     }
@@ -155,7 +154,6 @@ class ViewController: UIViewController, MKMapViewDelegate, AVAudioPlayerDelegate
 
     func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
         currentLocation = CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude)
-        println("updating location")
         if (self.player == nil){
             playClosestSound()
         } else { //if player is not nil, a sound is playing so do not update location

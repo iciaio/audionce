@@ -80,7 +80,6 @@ class profileVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         PFUser.logOut()
         var currentUser = PFUser.currentUser()
         self.performSegueWithIdentifier("goto_login", sender: self)
-        println("logout complete")
     }
 
     func displayNewUsernameAlert(){
@@ -109,11 +108,9 @@ class profileVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     }
     
     func displayNewProfilePictureAlert(){
-        println("new picture")
         let alert = UIAlertController(title: "Profile Picture", message: "Take or upload a new photo.", preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         let upload = UIAlertAction(title: "Upload", style: UIAlertActionStyle.Default, handler: {(action) -> Void in
-            println("upload image")
             let picker = UIImagePickerController()
             picker.delegate = self
             picker.sourceType = .PhotoLibrary
@@ -122,7 +119,6 @@ class profileVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         alert.addAction(upload)
         
         let takePhoto = UIAlertAction(title: "Take Photo", style: UIAlertActionStyle.Default, handler: {(action) -> Void in
-            println("take photo")
             let picker = UIImagePickerController()
             picker.delegate = self
             picker.sourceType = .Camera

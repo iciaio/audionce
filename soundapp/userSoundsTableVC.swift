@@ -47,7 +47,6 @@ class userSoundsTableVC: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        println(self.soundArray.count)
         return self.soundArray.count
     }
     
