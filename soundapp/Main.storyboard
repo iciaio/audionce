@@ -119,10 +119,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FC8-qX-YBi">
-                                <rect key="frame" x="0.0" y="64" width="320" height="2"/>
-                                <color key="trackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -133,7 +129,6 @@
                         <outlet property="containerForCollection" destination="Mwu-iz-i4J" id="SaN-hO-EsS"/>
                         <outlet property="playPauseButton" destination="Cuh-YA-ZUK" id="r6B-U9-Up8"/>
                         <outlet property="privacyToggle" destination="0bK-pw-g0i" id="Fpc-uo-wPt"/>
-                        <outlet property="progressBar" destination="FC8-qX-YBi" id="zLP-hs-jOX"/>
                         <outlet property="recordStopButton" destination="dSc-x5-G6I" id="tUm-zf-HRK"/>
                         <outlet property="submitButton" destination="E1d-PT-m0H" id="h1g-Rb-eD1"/>
                         <outlet property="titleTextField" destination="vYH-QJ-nlQ" id="Iun-Fx-Cb2"/>
