@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>9B3A8997-2169-4D27-8F81-810D17C39ED0</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>soundapp</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>2470843F2240F35A2F17E4ACFE14C9BF886F63A2</key>
 		<string>https://github.com/iciaio/audionce.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>soundapp.xcodeproj/project.xcworkspace</string>
+	<string>soundapp.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>2470843F2240F35A2F17E4ACFE14C9BF886F63A2</key>

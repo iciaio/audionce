@@ -581,7 +581,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rolando Schneiderman (7NJBZDCQYV)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/Alicia/Documents/navigating/navigating,
 					"/Users/Alicia/Downloads/parse-library-1.7.3",
 					"$(PROJECT_DIR)/soundapp",
 				);
@@ -600,7 +599,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rolando Schneiderman (7NJBZDCQYV)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/Alicia/Documents/navigating/navigating,
 					"/Users/Alicia/Downloads/parse-library-1.7.3",
 					"$(PROJECT_DIR)/soundapp",
 				);
